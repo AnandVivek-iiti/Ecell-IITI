@@ -62,7 +62,13 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
   body {
     @apply bg-background text-foreground;
+    overscroll-behavior-y: contain;
+    min-height: 100vh;
   }
 }
