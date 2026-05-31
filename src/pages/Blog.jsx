@@ -5,13 +5,14 @@ import BlogFilters from '../components/blog/BlogFilters'
 
 export default function Blog() {
     const [searchTerm, setSearchTerm] = useState('')
+    const [selectedTag, setSelectedTag] = useState('All')
 
     return (
         <>
             <BlogHero />
 
-            <BlogFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <BlogGrid searchTerm={searchTerm} />
+            <BlogFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} selectedTag = {selectedTag} setSelectedTag ={setSelectedTag} />
+            <BlogGrid searchTerm={searchTerm} selectedTag = {selectedTag}/>
         </>
     )
 }

@@ -3,12 +3,26 @@ import BlogCard from './BlogCard'
 
 export default function BlogGrid({
   searchTerm,
+  selectedTag,
 }) {
 
-  console.log("searchTerm:", searchTerm);
-  const filteredBlogs = blogs.filter((blog) =>
-  blog.title.toLowerCase().includes((searchTerm || "").toLowerCase())
+  const filteredBlogs = blogs.filter((blog) =>{
+
+    const matchesSearch = blog.title.toLowerCase().includes((searchTerm || "").toLowerCase())
+
+    const matchesTag = selectedTag === 'All' || blog.tag === selectedTag
+
+    return matchesSearch && matchesTag
+  }
 );
+
+if (filteredBlogs.length === 0) {
+  return (
+    <p className="text-center text-lg">
+      No blogs found.
+    </p>
+  )
+}
 
   return (
     <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
