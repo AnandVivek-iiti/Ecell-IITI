@@ -13,6 +13,7 @@ import Team from './pages/Team'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Blog from './pages/Blog'
+import BlogDetails from './pages/BlogDetails'
 
 function AppContent() {
   const location = useLocation()
@@ -41,6 +42,7 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
         </Routes>
       </main>
 

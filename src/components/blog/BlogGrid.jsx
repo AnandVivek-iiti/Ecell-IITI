@@ -29,11 +29,13 @@ if (filteredBlogs.length === 0) {
 
       {filteredBlogs.map((blog) => (
         <BlogCard
-          key={blog.id}
+          key = {blog.id}
           title={blog.title}
           date={blog.date}
           tag={blog.tag}
           image={blog.image}
+          description={blog.description}
+          id = {blog.id}
         />
       ))}
 

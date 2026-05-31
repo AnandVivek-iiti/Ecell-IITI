@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom"
+
 export default function BlogCard({
     title,
+    description,
     date,
     tag,
     image,
+    id,
 }) {
     return (
+        <Link to={`/blog/${id}`}>
         <div className="overflow-hidden rounded-xl bg-white shadow-md">
 
             <img src={image} alt={title} className="h-52 w-full object-cover" />
@@ -19,12 +24,17 @@ export default function BlogCard({
                     {title}
                 </h3>
 
+                <p className="mt-2 text-slate-600">
+                    {description}
+                </p>
+
                 <p className="mt-2 text-sm text-slate-500">
-                    {date}
+                    {date} 
                 </p>
 
             </div>
 
         </div>
+        </Link>
     )
 }
