@@ -1,3 +1,5 @@
+import blogs from "../../data/blog";
+
 export default function BlogFilters({
     searchTerm,
     setSearchTerm,
@@ -5,14 +7,22 @@ export default function BlogFilters({
     setSelectedTag,
 }) {
     const tags = [
-        'All',
-        'Startup',
-        'FinTech',
-        'CaseStudy'
-    ]
+    "All",
+    ...new Set(blogs.map(blog => blog.tag))
+];
 
     return (
-        <div className="mx-auto max-w-2xl">
+        <div
+  className="
+    relative
+    overflow-hidden
+    rounded-2xl
+    border
+    border-white/10
+    bg-white/5
+    backdrop-blur-lg
+  "
+>
 
             <input
                 type="text"

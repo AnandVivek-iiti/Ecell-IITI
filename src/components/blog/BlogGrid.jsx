@@ -19,7 +19,17 @@ export default function BlogGrid({
 if (filteredBlogs.length === 0) {
   return (
     <p className="text-center text-lg">
-      No blogs found.
+      <div className="py-20 text-center">
+
+  <h3 className="text-2xl font-semibold text-white">
+    No Articles Found
+  </h3>
+
+  <p className="mt-2 text-slate-400">
+    Try a different search term or category.
+  </p>
+
+</div>
     </p>
   )
 }

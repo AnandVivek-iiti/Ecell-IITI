@@ -10,6 +10,7 @@ const blogs = [
     date: "May 25, 2026",
     tag: "Startup",
     image: "https://picsum.photos/400/250?1",
+    readingTime:"5 min read"
   },
 
   {
@@ -23,6 +24,7 @@ const blogs = [
     date: "May 24, 2026",
     tag: "FinTech",
     image: "https://picsum.photos/400/250?2",
+    readingTime:"5 min read"
   },
 
   {
@@ -36,6 +38,7 @@ const blogs = [
     date: "May 20, 2026",
     tag: "CaseStudy",
     image: "https://picsum.photos/400/250?3",
+    readingTime:"5 min read"
   },
 ]
 

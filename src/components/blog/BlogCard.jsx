@@ -10,16 +10,50 @@ export default function BlogCard({
 }) {
     return (
         <Link to={`/blog/${id}`}>
-        <div className="overflow-hidden rounded-xl bg-white shadow-md">
+        <div
+  className="
+  group
+  overflow-hidden
+  rounded-3xl
+  bg-white
+  shadow-lg
+  transition-all
+  duration-300
+  hover:-translate-y-2
+  hover:shadow-[0_0_30px_rgba(12,8,183,0.35)]
+"
+>
 
-            <img src={image} alt={title} className="h-52 w-full object-cover" />
+            <div className="overflow-hidden">
+  <img
+    src={image}
+    alt={title}
+    className="
+      h-52
+      w-full
+      object-cover
+      transition
+      duration-500
+      group-hover:scale-110
+    "
+  />
+</div>
 
             <div className="p-4">
 
-                <span className="rounded-full bg-slate-200 px-3 py-1 text-xs">
-                    #{tag}
-                </span>
-
+                <span
+  className="
+  rounded-full
+  bg-[#7995CD]/20
+  px-3
+  py-1
+  text-xs
+  font-medium
+  text-[#0C08B7]
+"
+>
+  #{tag}
+</span>
                 <h3 className="mt-3 text-xl font-semibold">
                     {title}
                 </h3>
@@ -31,6 +65,21 @@ export default function BlogCard({
                 <p className="mt-2 text-sm text-slate-500">
                     {date} 
                 </p>
+                <div className="mt-4 flex items-center gap-2 text-[#0C08B7] font-medium">
+
+  Read Article
+
+  <span
+    className="
+      transition-transform
+      duration-300
+      group-hover:translate-x-1
+    "
+  >
+    →
+  </span>
+
+</div>
 
             </div>
 
