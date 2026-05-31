@@ -12,7 +12,7 @@ export default function BlogFilters({
     ]
 
     return (
-        <div className="mb-8">
+        <div className="mx-auto max-w-2xl">
 
             <input
                 type="text"
@@ -23,7 +23,7 @@ export default function BlogFilters({
                 }
                 className="w-full rounded-lg border p-3"
             />
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center gap-3">
 
                 {tags.map((tag) => (
                     <button
