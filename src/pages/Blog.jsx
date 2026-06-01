@@ -9,6 +9,7 @@ export default function Blog() {
     const [selectedTag, setSelectedTag] = useState('All')
 
     return (
+        <div className="-mx-4 sm:-mx-6 lg:-mx-8">
         <div
             className="
         min-h-screen
@@ -32,6 +33,7 @@ export default function Blog() {
 
                 <BlogGrid searchTerm={searchTerm} selectedTag={selectedTag} />
             </section>
+        </div>
         </div>
     )
 }

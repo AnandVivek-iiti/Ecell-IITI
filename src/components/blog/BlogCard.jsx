@@ -13,6 +13,9 @@ export default function BlogCard({
         <div
   className="
   group
+  h-full
+  flex
+  flex-col
   overflow-hidden
   rounded-3xl
   bg-white
@@ -21,6 +24,8 @@ export default function BlogCard({
   duration-300
   hover:-translate-y-2
   hover:shadow-[0_0_30px_rgba(12,8,183,0.35)]
+  border-[#7995CD]/20
+shadow-[0_0_15px_rgba(121,149,205,0.08)]
 "
 >
 

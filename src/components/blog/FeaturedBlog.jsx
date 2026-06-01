@@ -11,7 +11,7 @@ export default function FeaturedBlog() {
         >
             <section className="overflow-hidden rounded-3xl border border-white/10 bg-[#111827] shadow-xl">
 
-                <div className="grid md:grid-cols-2">
+                <div className="grid md:grid-cols-[1.3fr_1fr]">
 
                     <div className="overflow-hidden">
                         <div className="relative overflow-hidden">
@@ -22,12 +22,14 @@ export default function FeaturedBlog() {
                             />
 
                             <div
-                                className="
-      absolute
-      inset-0
-      bg-black/20
-    "
-                            />
+                                 className="
+                                   absolute
+                                   inset-0
+                                   bg-gradient-to-t
+                                   from-black/60
+                                   to-transparent
+                                 "
+                               />
                         </div>
 
                     </div>
