@@ -7,11 +7,7 @@ const TEAM_DATA = {
   volunteers: [],
 };
 
-// ─── TEAM DATA ────────────────────────────────────────────────────────────────
-// Replaced `null` with placeholder URLs so you can see the photos working immediately.
-// Swap these strings with your actual imported image variables when ready.
-
-// ─── SVG ICONS ────────────────────────────────────────────────────────────────
+// SVG ICONS
 const IconLinkedIn = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -29,7 +25,7 @@ const IconMail = () => (
   </svg>
 );
 
-// ─── PHOTO / AVATAR ───────────────────────────────────────────────────────────
+// PHOTO / AVATAR
 function PersonPhoto({ photo, initials, size, accent, index }) {
   const bg = `hsl(${(index * 47) % 360},40%,12%)`;
   if (photo) {
@@ -62,7 +58,7 @@ function PersonPhoto({ photo, initials, size, accent, index }) {
   );
 }
 
-// ─── SOCIAL BUTTON ────────────────────────────────────────────────────────────
+// SOCIAL BUTTON
 function SocialBtn({ href, accent, children }) {
   const [hov, setHov] = useState(false);
   return (
@@ -83,13 +79,12 @@ function SocialBtn({ href, accent, children }) {
   );
 }
 
-// ─── SECRETARY CARD (Premium Gold & Blue Design) ──────────────────────────────
+// SECRETARY CARD
 function SecretaryCard({ member, index }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hov, setHov] = useState(false);
   const ref = useRef(null);
   
-  // Enforce Gold/Blue palette for Secretaries
   const accent = "#d4a843"; 
   const secondary = "#0c1f45"; 
 
@@ -122,7 +117,6 @@ function SecretaryCard({ member, index }) {
           : "0 10px 40px #00000099",
       }}>
 
-        {/* Dynamic Blue/Gold Shimmer */}
         <div style={{
           position: "absolute", inset: 0, borderRadius: 24, pointerEvents: "none",
           background: hov
@@ -131,7 +125,6 @@ function SecretaryCard({ member, index }) {
           transition: "background 0.2s",
         }} />
 
-        {/* Premium Gold Top Edge */}
         <div style={{
           position: "absolute", top: 0, left: 0, right: 0, height: 3,
           background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
@@ -139,7 +132,6 @@ function SecretaryCard({ member, index }) {
           transition: "opacity 0.3s",
         }} />
 
-        {/* Photo with glowing backdrop */}
         <div style={{ marginBottom: 24, position: "relative" }}>
           <div style={{
             position: "absolute", inset: -10, borderRadius: "50%",
@@ -183,12 +175,12 @@ function SecretaryCard({ member, index }) {
   );
 }
 
-// ─── MEMBER CARD ──────────────────────────────────────────────────────────────
+// MEMBER
 function MemberCard({ member, index }) {
   const [hov, setHov] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const ref = useRef(null);
-  const accent = "#4fc3f7"; // Crisp light blue for core members
+  const accent = "#4fc3f7";
 
   const onMove = (e) => {
     if (!ref.current) return;
@@ -244,7 +236,7 @@ function MemberCard({ member, index }) {
   );
 }
 
-// ─── VOLUNTEER BADGE ──────────────────────────────────────────────────────────
+// VOLUNTEER
 function VolBadge({ member, index }) {
   const [hov, setHov] = useState(false);
   const accent = "#81c784"; // Fresh green for volunteers
@@ -272,7 +264,6 @@ function VolBadge({ member, index }) {
   );
 }
 
-// ─── SECTION HEADER ───────────────────────────────────────────────────────────
 function SectionHeader({ label, accent, count }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
@@ -294,7 +285,7 @@ function SectionHeader({ label, accent, count }) {
   );
 }
 
-// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
+// MAIN COMPONENT
 export default function Team() {
   return (
     <>
@@ -335,7 +326,6 @@ export default function Team() {
         overflowX: "hidden",
       }}>
 
-        {/* ── Atmosphere layer (Deep Blues & subtle Gold) ───────────────── */}
         <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0 }}>
           <div className="orb" style={{ left: "-5%", top: "-5%", width: 700, height: 700, background: "#1e3a8a", filter: "blur(140px)", opacity: 0.15 }} />
           <div className="orb" style={{ right: "-10%", top: "15%", width: 600, height: 600, background: "#d4a843", filter: "blur(150px)", opacity: 0.1 }} />
@@ -353,10 +343,10 @@ export default function Team() {
           }} />
         </div>
 
-        {/* ── Content ──────────────────────────────────── */}
+        {/*Content*/}
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 32px 80px" }}>
 
-          {/* ── HERO ──────────────────────────────────────── */}
+          {/*Hero*/}
           <div className="fade-up" style={{ paddingTop: 80, paddingBottom: 80, textAlign: "center" }}>
             <h1 style={{
               fontFamily: "'Syne', sans-serif",
@@ -390,7 +380,7 @@ export default function Team() {
             </p>
           </div>
 
-          {/* ── SECRETARIES ──────────────────────────────── */}
+          {/*SECRETARIES*/}
           <section className="fade-up" style={{ marginBottom: 96, animationDelay: "0.1s" }}>
             <SectionHeader label="Secretaries" accent="#d4a843" count={TEAM_DATA.secretaries.length} />
             <div className="sec-grid">
@@ -400,7 +390,7 @@ export default function Team() {
             </div>
           </section>
 
-          {/* ── CORE MEMBERS ─────────────────────────────── */}
+          {/*CORE MEMBERS*/}
           <section className="fade-up" style={{ marginBottom: 96, animationDelay: "0.2s" }}>
             <SectionHeader label="Core Members" accent="#4fc3f7" count={TEAM_DATA.members.length} />
             <div className="mem-grid">
@@ -410,7 +400,7 @@ export default function Team() {
             </div>
           </section>
 
-          {/* ── VOLUNTEERS ───────────────────────────────── */}
+          {/*VOLUNTEERS*/}
           <section className="fade-up" style={{ animationDelay: "0.3s" }}>
             <SectionHeader label="Volunteers" accent="#81c784" count={TEAM_DATA.volunteers.length} />
             <div style={{
@@ -433,7 +423,7 @@ export default function Team() {
             </div>
           </section>
 
-          {/* ── FOOTER ───────────────────────────────────── */}
+          {/*FOOTER*/}
           <div style={{
             display: "none", textAlign: "center", marginTop: 100,
             paddingTop: 48, borderTop: "1px solid #ffffff11",
