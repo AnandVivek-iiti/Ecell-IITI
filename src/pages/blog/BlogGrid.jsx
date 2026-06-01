@@ -1,4 +1,5 @@
-import blogs from "../data/blog"
+import blogs from "../../data/blog"
+
 import BlogCard from './BlogCard'
 
 export default function BlogGrid({
@@ -19,7 +20,7 @@ export default function BlogGrid({
 if (filteredBlogs.length === 0) {
   return (
     <p className="text-center text-lg">
-      <div className="py-20 text-center" >  
+      <div className="py-20 text-center" >
 
   <h3 className="text-2xl font-semibold text-white">
     No Articles Found

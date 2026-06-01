@@ -1,4 +1,5 @@
-import blogs from "../data/blog"
+import blogs from "../../data/blog"
+
 import { HiSearch } from "react-icons/hi";
 
 export default function BlogFilters({
@@ -58,7 +59,7 @@ export default function BlogFilters({
         />
       </div>
 
-   
+
       <div className="flex flex-wrap justify-center gap-3">
 
         {tags.map((tag) => {
@@ -101,7 +102,7 @@ export default function BlogFilters({
                 }
               `}
             >
-              {tag} 
+              {tag}
             </button>
           );
         })}
