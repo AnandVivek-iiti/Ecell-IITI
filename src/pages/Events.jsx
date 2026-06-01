@@ -7,7 +7,7 @@ const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#04112E] via-[#0A2463] to-[#0C08B7] py-16 px-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] py-16 px-7 md:px-10">
       {/* Hero Section */}
       <div className="text-center mb-16">
        <h1 className="text-4xl md:text-7xl font-bold text-white">
