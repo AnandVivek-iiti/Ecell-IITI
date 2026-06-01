@@ -1,4 +1,4 @@
-import blogs from "../../data/blog";
+import blogs from "../data/blog"
 import { Link } from "react-router-dom";
 
 export default function FeaturedBlog() {

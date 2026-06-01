@@ -1,4 +1,4 @@
-import blogs from "../../data/blog"
+import blogs from "../data/blog"
 import BlogCard from './BlogCard'
 
 export default function BlogGrid({
