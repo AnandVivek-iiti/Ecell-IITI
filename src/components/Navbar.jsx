@@ -19,25 +19,25 @@ export default function Navbar() {
   return (
     <header
       className="
-    sticky
-    top-0
-    z-50
-    bg-[#04052E]
-    border-b
-    border-white/10
-    shadow-lg shadow-black/20
-  "
-    >
+        sticky
+        top-0
+        z-50
+        bg-[#04052E]
+        border-b
+        border-white/10
+        shadow-lg shadow-black/20
+      "
+      >
       <div
         className="
-    mx-auto
-    flex
-    max-w-7xl
-    items-center
-    justify-between
-    px-6
-    py-3
-  "
+          mx-auto
+          flex
+          max-w-7xl
+          items-center
+          justify-between
+          px-6
+          py-3
+        "
       >
         <Link to="/" className="flex items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-white/5">
           <img src="/assets/ecell.png" alt="E-Cell IIT Indore" className="h-14 object-contain" />
@@ -47,107 +47,105 @@ export default function Navbar() {
         <nav className="hidden flex-1 justify-center items-center gap-2 md:flex">
           {navItems.map((item) => (
             <NavLink
-  key={item.name}
-  to={item.href}
-  className={({ isActive }) =>
-    `
-    group
-    relative
-    rounded-full
-    px-4
-    py-2
-    text-sm
-    font-semibold
-    transition-all
-    duration-300
-    ${
-      isActive
-        ? 'bg-[#0C08B7] text-white'
-        : 'text-slate-300 hover:bg-[#0C08B7]/20 hover:text-white'
-    }
-    `
-  }
->
-  {item.name}
-
-  <span
-    className="
-      absolute
-      left-4
-      right-4
-      -bottom-0.5
-      h-[2px]
-      origin-center
-      scale-x-0
-      bg-[#7995CD]
-      transition-transform
-      duration-300
-      group-hover:scale-x-100
-    "
-  />
-</NavLink>
+              key={item.name}
+              to={item.href}
+              className={({ isActive }) =>
+                `
+                group
+                relative
+                rounded-full
+                px-4             
+                py-2
+                text-sm
+                font-semibold
+                transition-all
+                duration-300
+                ${isActive
+                  ? 'bg-[#0C08B7] text-white'
+                  : 'text-slate-300 hover:bg-[#0C08B7]/20 hover:text-white'
+                }
+                `
+              }
+            >
+              {item.name}
+        
+              <span
+                className="
+                  absolute
+                  left-4
+                  right-4
+                  -bottom-0.5
+                  h-[2px]
+                  origin-center
+                  scale-x-0
+                  bg-[#7995CD]
+                  transition-transform
+                  duration-300
+                  group-hover:scale-x-100
+                "
+              />         
+            </NavLink>
           ))}
         </nav>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="
-    text-white
-    text-3xl
-    md:hidden
-  "
+            text-white
+            text-3xl
+            md:hidden
+          "
         >
           {isOpen ? <HiX /> : <HiMenuAlt3 />}
         </button>
-        
+
         <div
-  className={`
-    absolute
-    top-full
-    left-0
-    w-full
-    bg-[#04052E]
-    border-t
-    border-white/10
-    md:hidden
-    overflow-hidden
-    transition-all
-    duration-300
-    shadow-2xl
+          className={`
+            absolute
+            top-full        
+            left-0
+            w-full
+            bg-[#04052E]
+            border-t
+            border-white/10
+            md:hidden
+            overflow-hidden
+            transition-all
+            duration-300
+            shadow-2xl
 
-    ${
-      isOpen
-        ? 'max-h-96 opacity-100'
-        : 'max-h-0 opacity-0'
-    }
-  `}
->
-  <nav className="flex flex-col p-4">
+            ${isOpen
+              ? 'max-h-96 opacity-100'
+              : 'max-h-0 opacity-0'
+            }
+          `}
+        >
+          <nav className="flex flex-col p-4">
 
-    {navItems.map((item) => (
+            {navItems.map((item) => (
 
-      <NavLink
-        key={item.name}
-        to={item.href}
-        onClick={() => setIsOpen(false)}
-        className="
-          rounded-xl
-          px-5
-          py-4
-          text-lg
-          font-medium
-          text-slate-300
-          transition
-          hover:bg-[#0C08B7]/20
-          hover:text-white
-        "
-      >
-        {item.name}
-      </NavLink>
+              <NavLink
+                key={item.name}
+                to={item.href}
+                onClick={() => setIsOpen(false)}
+                className="
+                  rounded-xl
+                  px-5
+                  py-4
+                  text-lg
+                  font-medium
+                  text-slate-300
+                  transition
+                  hover:bg-[#0C08B7]/20
+                  hover:text-white
+                "
+              >
+                {item.name}
+              </NavLink>
 
-    ))}
+            ))}
 
-  </nav>
-</div>
+          </nav>
+        </div>
       </div>
     </header>
   )

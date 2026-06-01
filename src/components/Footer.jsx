@@ -57,37 +57,37 @@ export default function Footer() {
             </div>
           </div>
           <div>
-  <h3 className="mb-4 text-lg font-semibold text-white">
-    Follow Us
-  </h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">
+              Follow Us
+            </h3>
 
-  <div className="flex gap-3">
-    {socials.map((item) => (
-      <a
-        key={item.label}
-        href={item.href}
-        target="_blank"
-        rel="noreferrer"
-        className="
-          inline-flex
-          h-10
-          w-10
-          items-center
-          justify-center
-          rounded-full
-          border
-          border-white/20
-          text-slate-400
-          transition
-          hover:bg-[#0C08B7]
-          hover:text-white
-        "
-      >
-        <item.icon />
-      </a>
-    ))}
-  </div>
-</div>
+            <div className="flex gap-3">
+              {socials.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}          
+                  target="_blank"
+                  rel="noreferrer"
+                  className="
+                    inline-flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-white/20
+                    text-slate-400
+                    transition
+                    hover:bg-[#0C08B7]
+                    hover:text-white
+                  "
+                >
+                  <item.icon />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
