@@ -11,8 +11,9 @@ import About from './pages/About'
 import Outreach from './pages/Outreach'
 import Team from './pages/Team'
 import Gallery from './pages/Gallery'
-import Events from './pages/Events'
 import Contact from './pages/Contact'
+import Blog from './pages/Blog'
+import BlogDetails from './pages/BlogDetails'
 
 function AppContent() {
   const location = useLocation()
@@ -31,16 +32,17 @@ function AppContent() {
       <ScrollToTop />
       <Navbar />
 
-      <main className={`flex-grow px-4 py-8 sm:px-6 lg:px-8 route-transition ${pageReady ? 'page-visible' : ''}`}>
+      <main className={`flex-grow px-4 py-0 sm:px-6 lg:px-8 route-transition ${pageReady ? 'page-visible' : ''}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/outreach" element={<Outreach />} />
           <Route path="/team" element={<Team />} />
           <Route path="/gallery" element={<Gallery />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
         </Routes>
       </main>
 
