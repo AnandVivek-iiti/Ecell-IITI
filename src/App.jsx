@@ -12,6 +12,7 @@ import Outreach from './pages/Outreach'
 import Team from './pages/Team'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import Events from './pages/Events'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
 
