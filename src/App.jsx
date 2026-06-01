@@ -33,7 +33,7 @@ function AppContent() {
       <ScrollToTop />
       <Navbar />
 
-      <main className={`flex-grow py-0 route-transition ${pageReady ? 'page-visible' : ''}`}>
+      <main className={`flex-grow px-4 py-0 sm:px-6 lg:px-8 route-transition ${pageReady ? 'page-visible' : ''}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
