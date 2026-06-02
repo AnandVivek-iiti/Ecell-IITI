@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { events } from "../Data/Events/eventData";
-
+import { events } from "../Data/event";
 
 
 const Events = () => {
@@ -60,43 +59,47 @@ const Events = () => {
           </div>
         ))}
       </div>
+{/*Modal for selected event */}
 
-      {/* Modal */}
-       {/* {selectedEvent && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-y-auto my-auto">
-            <div className="flex justify-between items-center p-6 border-b">
-              <h2 className="text-3xl font-bold">
-                {selectedEvent.title}
-              </h2>
+{/* {selectedEvent && (
+  <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
 
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="text-3xl font-bold"
-              >
-                ×
-              </button>
-            </div>
+    <div
+      className="bg-white rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+        <h2 className="text-3xl font-bold">
+          {selectedEvent.title}
+        </h2>
 
-            <img
-              src={selectedEvent.image}
-              alt={selectedEvent.title}
-              className="w-full h-96 object-cover"
-            />
+        <button
+          onClick={() => setSelectedEvent(null)}
+          className="text-4xl"
+        >
+          ×
+        </button>
+      </div>
 
-            <div className="p-8">
-              <p className="text-blue-600 font-semibold mb-4">
-                {selectedEvent.date}
-              </p>
+      <img
+        src={selectedEvent.image}
+        alt={selectedEvent.title}
+        className="w-full h-96 object-cover"
+      />
 
-              <p className="text-gray-700 leading-8 text-lg">
-                {selectedEvent.fullDesc}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}  */}
+      <div className="p-8">
+        <p className="text-blue-600 font-semibold mb-4">
+          {selectedEvent.date}
+        </p>
 
+        <p className="text-gray-700 leading-8 text-lg">
+          {selectedEvent.fullDesc}
+        </p>
+      </div>
+    </div>
+
+  </div>
+)} */}
 
 
     </div>
@@ -104,6 +107,8 @@ const Events = () => {
 };
 
 export default Events;
+
+
 
 
 

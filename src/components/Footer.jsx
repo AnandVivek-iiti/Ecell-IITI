@@ -49,6 +49,13 @@ export default function Footer() {
               </Link>
 
               <Link
+                to="/events"
+                className="text-slate-400 transition hover:text-white"
+              >
+                Events
+              </Link>
+
+              <Link
                 to="/contact"
                 className="text-slate-400 transition hover:text-white"
               >

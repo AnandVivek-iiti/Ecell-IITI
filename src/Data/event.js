@@ -1,6 +1,8 @@
-import Event1 from "../../assets/Events/Event 1.png";
-import Event2 from "../../assets/Events/Event 2.png";
-
+import Event1 from "../assets/Events/Event 1.jpg";
+import Event2 from "../assets/Events/Event 2.jpeg";
+import Event3 from "../assets/Events/Event 3.jpeg";
+import Event4 from "../assets/Events/Event 4.jpeg";
+import Event5 from "../assets/Events/Event 5.png";
 
 export const events = [
   {
@@ -25,7 +27,7 @@ export const events = [
     id: 3,
     title: "Entrepreneur's Talks",
     date: "18th June",
-    image: Event1,
+    image: Event3,
     shortDesc: "Listen to successful entrepreneurs.",
     fullDesc:
       "Talk shows remain the highlight of the summit each year,attracting a huge audience of students,professors and more from across different institutions.This year we aim to make the talk show grand and glorious than ever,and will be hosting some of the most celebrated entrepreneurs who are sure to leave you spellbound with their journeys and experiences.In the past editions,we have hosted entrepreneurs like Aman Dhattarwal, Sandeep Jain,Mayank Pratap and many more who have built their businesses from scratch and have brought revolution in their respective fields.We are excited to host yet another power packed edition to the talk show that will leave you energized to the core !",
@@ -34,7 +36,7 @@ export const events = [
     id: 4,
     title: "Startup Expo",
     date: "25th June",
-    image: Event2,
+    image: Event4,
     shortDesc: "Showcase your startup ideas.",
     fullDesc:
       "A start up expo was organised that witnessed stalls of numerous interesting and innovative startups that had engaging display units.A lot of people came to interact with the founders and learnt how startups actually get going.The event was a huge success and the audience was left thoroughly impressed.",
@@ -43,7 +45,7 @@ export const events = [
     id: 5,
     title: "E-Summit 2025",
     date: "2nd July",
-    image: Event1,
+    image: Event5,
     shortDesc: "Learn about entrepreneurship and innovation.",
     fullDesc:
       "E-Summit is the flagship event organized by the E-Cell,IIT Indore annually.It is one of the most awaited events hosted by the institute that witnesses massive participation from across the country.Through this event,we aim to ignite the entrepreneur inside students by bringing them together to compete in various competitions exploring all aspects of entrepreneurship. We also host some of the most seasoned and celebrated entrepreneurs who enlighten our audience with their jaw-dropping journeys.",
