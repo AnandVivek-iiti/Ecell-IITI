@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { events } from "../Data/event";
-
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Events = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] py-16 px-7 md:px-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] py-16 px-6 md:px-10">
       {/* Hero Section */}
-      <div className="text-center mb-16">
-       <h1 className="text-4xl md:text-7xl font-bold text-white">
+      <div className="text-center mb-20">
+        <h1 className="text-5xl md:text-7xl font-bold text-white">
           E-Cell Events
         </h1>
+
+        <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
 
         <p className="max-w-4xl mx-auto mt-8 text-lg md:text-xl text-blue-100 leading-relaxed">
           Discover and participate in inspiring events organized by E-Cell IIT
@@ -22,94 +25,91 @@ const Events = () => {
       </div>
 
       {/* Event Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {events.map((event) => (
           <div
             key={event.id}
-            className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            className="
+              group
+              overflow-hidden
+              rounded-3xl
+              bg-white/5
+              backdrop-blur-lg
+              border border-white/10
+              shadow-xl
+              hover:shadow-blue-500/20
+              hover:-translate-y-3
+              transition-all
+              duration-500
+              flex
+              flex-col
+            "
           >
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-60 object-cover"
-            />
+            {/* Image */}
+            <div className="overflow-hidden relative">
+              <img
+                src={event.image}
+                alt={event.title}
+                className="
+                  w-full
+                  h-60
+                  object-cover
+                  transition-transform
+                  duration-700
+                  group-hover:scale-110
+                "
+              />
 
-            <div className="p-6">
-              <div className="inline-block bg-slate-700 text-white text-sm px-4 py-2 rounded-full mb-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+              <span className="absolute top-4 left-4 bg-[#0F172A]/90 text-white text-xs px-4 py-2 rounded-full font-medium backdrop-blur-md">
                 Past Event
-              </div>
+              </span>
+            </div>
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 h-10 flex items-start">
-  {event.title}
-</h3>
+            {/* Content */}
+            <div className="p-6 flex flex-col flex-1">
+              <p className="text-blue-400 text-sm font-semibold mb-3">
+                {event.date}
+              </p>
 
-              <p className="text-gray-600 h-12 line-clamp-3 mb-5">
-  {event.shortDesc}
-</p>
+              <h3 className="text-2xl font-bold text-white mb-1 min-h-[64px]">
+                {event.title}
+              </h3>
 
-              <p className="text-blue-600 font-medium mb-6">{event.date}</p>
+              <p className="text-slate-300 leading-7 flex-1">
+                {event.shortDesc}
+              </p>
 
-             <button
-  onClick={() => setSelectedEvent(event)}
-  className="mt-auto w-full py-3 rounded-xl bg-[#e8e9ed] text-blue-900 font-semibold border border-[#7d87a3] hover:bg-[#6982c9] transition-all duration-300"
->
-  Read More →
-</button>
+              {/* Button */}
+              <button
+                onClick={() => navigate(`/events/${event.id}`)}
+                className="
+                  mt-8
+                  w-full
+                  py-3.5
+                  rounded-xl
+                  font-semibold
+                  text-white
+                  bg-gradient-to-r
+                  from-blue-600
+                  to-indigo-600
+                  hover:from-blue-500
+                  hover:to-purple-600
+                  transition-all
+                  duration-300
+                  shadow-lg
+                  hover:shadow-blue-500/40
+                "
+              >
+                Read More →
+              </button>
             </div>
           </div>
         ))}
       </div>
-{/*Modal for selected event */}
-
-{/* {selectedEvent && (
-  <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
-
-    <div
-      className="bg-white rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-        <h2 className="text-3xl font-bold">
-          {selectedEvent.title}
-        </h2>
-
-        <button
-          onClick={() => setSelectedEvent(null)}
-          className="text-4xl"
-        >
-          ×
-        </button>
-      </div>
-
-      <img
-        src={selectedEvent.image}
-        alt={selectedEvent.title}
-        className="w-full h-96 object-cover"
-      />
-
-      <div className="p-8">
-        <p className="text-blue-600 font-semibold mb-4">
-          {selectedEvent.date}
-        </p>
-
-        <p className="text-gray-700 leading-8 text-lg">
-          {selectedEvent.fullDesc}
-        </p>
-      </div>
-    </div>
-
-  </div>
-)} */}
-
-
     </div>
   );
 };
 
 export default Events;
-
-
-
-
-
-

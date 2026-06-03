@@ -15,6 +15,7 @@ import Contact from './pages/Contact'
 import Events from './pages/Events'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
+import EventDetails from "./pages/EventDetails";
 
 function AppContent() {
   const location = useLocation()
@@ -45,6 +46,8 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
         </Routes>
       </main>
 
