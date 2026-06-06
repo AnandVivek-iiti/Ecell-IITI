@@ -23,10 +23,14 @@ export default function Navbar() {
         sticky
         top-0
         z-50
-        bg-white
+        bg-gradient-to-br
+        from-blue-200
+        via-blue-50
+        to-indigo-200
         border-b
-        border-slate-200
-        shadow-sm
+        border-blue-300/60
+        shadow-md
+        shadow-blue-500/10
       "
     >
       <div
@@ -40,7 +44,7 @@ export default function Navbar() {
           py-3
         "
       >
-        <Link to="/" className="flex items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-slate-100">
+        <Link to="/" className="flex items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-blue-200/50">
           <img src="/assets/ecell.png" alt="E-Cell IIT Indore" className="h-14 object-contain" />
         </Link>
 
@@ -62,7 +66,7 @@ export default function Navbar() {
                 duration-300
                 ${isActive
                   ? 'bg-blue-600 text-white'
-                  : 'text-slate-700 hover:bg-blue-50 hover:text-blue-700'
+                  : 'text-slate-700 hover:bg-blue-200/70 hover:text-blue-700'
                 }
                 `
               }
@@ -78,7 +82,7 @@ export default function Navbar() {
                   h-[2px]
                   origin-center
                   scale-x-0
-                  bg-blue-500
+                  bg-blue-600
                   transition-transform
                   duration-300
                   group-hover:scale-x-100
@@ -106,9 +110,12 @@ export default function Navbar() {
             top-full        
             left-0
             w-full
-            bg-white
+            bg-gradient-to-br
+            from-blue-200
+            via-blue-50
+            to-indigo-200
             border-t
-            border-slate-200
+            border-blue-300/60
             md:hidden
             overflow-hidden
             transition-all
@@ -135,7 +142,7 @@ export default function Navbar() {
                   font-medium
                   text-slate-700
                   transition
-                  hover:bg-blue-50
+                  hover:bg-blue-200/70
                   hover:text-blue-700
                 "
               >
