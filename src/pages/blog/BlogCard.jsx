@@ -12,23 +12,21 @@ export default function BlogCard({
         <Link to={`/blog/${id}`}>
             <div
                 className="
-          group
-          h-full
-          flex
-          flex-col
-          overflow-hidden                    
-          rounded-3xl
-          bg-white
-          shadow-lg
-          transition-all
-          duration-300
-          hover:-translate-y-2
-          hover:shadow-[0_0_30px_rgba(12,8,183,0.35)]
-          border-[#7995CD]/20
-          shadow-[0_0_15px_rgba(121,149,205,0.08)]                
-        "
+                  group
+                  h-full
+                  flex
+                  flex-col
+                  overflow-hidden                    
+                  rounded-3xl
+                  bg-white
+                  transition-all
+                  duration-300
+                  hover:-translate-y-2
+                  hover:shadow-[0_0_30px_rgba(12,8,183,0.35)]
+                  border-[#7995CD]/20
+                  shadow-[0_0_15px_rgba(121,149,205,0.08)]                
+                "
             >
-
                 <div className="overflow-hidden">
                     <img
                         src={image}
@@ -45,7 +43,6 @@ export default function BlogCard({
                 </div>
 
                 <div className="p-4">
-
                     <span
                         className="
                           rounded-full
@@ -71,24 +68,20 @@ export default function BlogCard({
                     <p className="mt-2 text-sm text-slate-500">
                         {date}
                     </p>
+                    
                     <div className="mt-4 flex items-center gap-2 text-[#0C08B7] font-medium">
-
                         Read Article
-
                         <span
                             className="
-                          transition-transform
-                          duration-300
-                          group-hover:translate-x-1
-                        "
+                              transition-transform
+                              duration-300
+                              group-hover:translate-x-1
+                            "
                         >
                             →
                         </span>
-
                     </div>
-
                 </div>
-
             </div>
         </Link>
     )
