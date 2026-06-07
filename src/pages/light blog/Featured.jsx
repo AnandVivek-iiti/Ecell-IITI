@@ -1,4 +1,4 @@
-import blogs from "../Data/blog"
+import blogs from "../../data/blog"
 import { Link } from "react-router-dom";
 
 export default function FeaturedBlog() {
@@ -10,7 +10,7 @@ export default function FeaturedBlog() {
             className="group block"
         >
             <div className="grid overflow-hidden rounded-3xl bg-white/80 backdrop-blur-sm border border-blue-200/50 shadow-lg shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2 hover:border-blue-300/60 hover:shadow-xl hover:shadow-blue-500/20 md:grid-cols-2">
-                
+
                 {/* Image Section */}
                 <div className="aspect-[4/3] overflow-hidden bg-blue-100">
                     <img
@@ -25,15 +25,15 @@ export default function FeaturedBlog() {
                     <span className="mb-3 w-fit rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-blue-500/25">
                         Featured Article
                     </span>
-                    
+
                     <h2 className="text-2xl font-bold md:text-3xl bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent">
                         {featured.title}
                     </h2>
-                    
+
                     <p className="mt-3 text-blue-800/80 leading-relaxed">
                         {featured.description}
                     </p>
-                    
+
                     <div className="mt-5 flex items-center gap-3 text-sm font-medium text-blue-700">
                         <span className="flex items-center gap-1.5">
                             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
