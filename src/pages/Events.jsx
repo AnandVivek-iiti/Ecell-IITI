@@ -1,114 +1,196 @@
 import React from "react";
 import { events } from "../Data/event";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 
 const Events = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] py-16 px-6 md:px-10">
-      {/* Hero Section */}
-      <div className="text-center mb-20">
-        <h1 className="text-5xl md:text-7xl font-bold text-white">
-          E-Cell Events
-        </h1>
+    <section className="relative min-h-screen bg-gradient-to-b from-[#EEF2FE] via-white to-[#F8FAFF] py-20 px-6 md:px-10 overflow-hidden">
 
-        <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
+      {/* Background Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
 
-        <p className="max-w-4xl mx-auto mt-8 text-lg md:text-xl text-blue-100 leading-relaxed">
-          Discover and participate in inspiring events organized by E-Cell IIT
-          Indore. From startup bootcamps and entrepreneurship workshops to
-          networking sessions, founder talks, and innovation challenges, we
-          empower students to transform ideas into impactful ventures.
-        </p>
+        <div
+          className="
+            absolute
+            top-[-150px]
+            left-[-150px]
+            w-[500px]
+            h-[500px]
+            rounded-full
+            bg-blue-300/20
+            blur-[120px]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-[-100px]
+            right-[-100px]
+            w-[450px]
+            h-[450px]
+            rounded-full
+            bg-indigo-300/20
+            blur-[120px]
+          "
+        />
+
       </div>
 
-      {/* Event Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {events.map((event) => (
-          <div
-            key={event.id}
+      <div className="relative z-10 max-w-7xl mx-auto">
+
+        {/* Hero Section */}
+        <div className="max-w-4xl mb-20">
+
+          <p className="uppercase tracking-[0.35em] text-[#3461FF] text-sm font-medium mb-6">
+            E-CELL IIT INDORE
+          </p>
+
+          <h1
             className="
-              group
-              overflow-hidden
-              rounded-3xl
-              bg-white/5
-              backdrop-blur-lg
-              border border-white/10
-              shadow-xl
-              hover:shadow-blue-500/20
-              hover:-translate-y-3
-              transition-all
-              duration-500
-              flex
-              flex-col
+              text-5xl
+              md:text-6xl
+              font-bold
+              leading-tight
+              bg-gradient-to-r
+              from-[#1E2A78]
+              via-[#3461FF]
+              to-[#5B4DFF]
+              bg-clip-text
+              text-transparent
             "
           >
-            {/* Image */}
-            <div className="overflow-hidden relative">
-              <img
-                src={event.image}
-                alt={event.title}
-                className="
-                  w-full
-                  h-60
-                  object-cover
-                  transition-transform
-                  duration-700
-                  group-hover:scale-110
-                "
-              />
+            Events & Experiences
+          </h1>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <p className="mt-8 text-lg text-slate-600 leading-9 max-w-3xl">
+            Discover competitions, startup showcases, entrepreneurial
+            workshops, founder talks and innovation-driven experiences
+            organized by E-Cell IIT Indore.
+          </p>
 
-              <span className="absolute top-4 left-4 bg-[#0F172A]/90 text-white text-xs px-4 py-2 rounded-full font-medium backdrop-blur-md">
-                Past Event
-              </span>
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-1">
-              <p className="text-blue-400 text-sm font-semibold mb-3">
-                {event.date}
-              </p>
-
-              <h3 className="text-2xl font-bold text-white mb-1 min-h-[64px]">
-                {event.title}
-              </h3>
-
-              <p className="text-slate-300 leading-7 flex-1">
-                {event.shortDesc}
-              </p>
-
-              {/* Button */}
-              <button
-                onClick={() => navigate(`/events/${event.id}`)}
-                className="
-                  mt-8
-                  w-full
-                  py-3.5
-                  rounded-xl
-                  font-semibold
-                  text-white
-                  bg-gradient-to-r
-                  from-blue-600
-                  to-indigo-600
-                  hover:from-blue-500
-                  hover:to-purple-600
-                  transition-all
-                  duration-300
-                  shadow-lg
-                  hover:shadow-blue-500/40
-                "
-              >
-                Read More →
-              </button>
-            </div>
+          <div className="mt-8 flex items-center gap-3 text-[#F59E0B] font-medium">
+            <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
+            Building India's Startup Culture
           </div>
-        ))}
+
+        </div>
+
+        {/* Event Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {events.map((event) => (
+            <div
+              key={event.id}
+              className="
+                group
+                bg-white
+                rounded-[28px]
+                overflow-hidden
+                border
+                border-[#E2E8F0]
+                shadow-sm
+                hover:-translate-y-2
+                hover:shadow-xl
+                transition-all
+                duration-300
+              "
+            >
+
+              {/* Image */}
+              <div className="overflow-hidden">
+
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="
+                    w-full
+                    h-60
+                    object-cover
+                    transition-transform
+                    duration-500
+                    group-hover:scale-105
+                  "
+                />
+
+              </div>
+
+              {/* Content */}
+              <div className="p-7">
+
+                <div className="flex items-center justify-between mb-4">
+
+                  <span className="text-[#F59E0B] font-semibold text-sm">
+                    {event.date}
+                  </span>
+
+                  <span
+                    className="
+                      text-xs
+                      bg-[#EEF2FE]
+                      text-[#3461FF]
+                      px-3
+                      py-1
+                      rounded-full
+                      font-medium
+                    "
+                  >
+                    Event
+                  </span>
+
+                </div>
+
+                <h3
+                  className="
+                    text-2xl
+                    font-bold
+                    text-[#1E2A78]
+                    mb-4
+                    transition-colors
+                    duration-300
+                    group-hover:text-[#3461FF]
+                  "
+                >
+                  {event.title}
+                </h3>
+
+                <p className="text-slate-600 leading-7">
+                  {event.shortDesc}
+                </p>
+
+                <button
+                  onClick={() => navigate(`/events/${event.id}`)}
+                  className="
+                    mt-8
+                    px-6
+                    py-3
+                    rounded-full
+                    bg-gradient-to-r
+                    from-[#3461FF]
+                    to-[#5B4DFF]
+                    text-white
+                    font-medium
+                    shadow-md
+                    transition-all
+                    duration-300
+                    hover:scale-105
+                  "
+                >
+                  Read More →
+                </button>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
       </div>
-    </div>
+
+    </section>
   );
 };
 

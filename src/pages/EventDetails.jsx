@@ -11,57 +11,247 @@ const EventDetails = () => {
 
   if (!event) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#01031F] text-white">
-        <h1 className="text-3xl font-bold">Event Not Found</h1>
+      <div className="min-h-screen flex items-center justify-center bg-[#EEF2FE]">
+        <h1 className="text-3xl font-bold text-[#1E2A78]">
+          Event Not Found
+        </h1>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] px-6 py-12">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-gradient-to-b from-[#EEF2FE] via-white to-[#F8FAFF] min-h-screen">
 
-        {/* Back Button */}
-        <Link
-          to="/events"
-          className="inline-flex items-center gap-2 text-blue-300 hover:text-white transition mb-10"
-        >
-          ← Back to Events
-        </Link>
+      {/* HERO SECTION */}
+      <div className="relative h-[70vh] min-h-[500px] overflow-hidden">
 
-        {/* Event Title */}
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
-  {event.title}
-</h1>
+        <img
+          src={event.image}
+          alt={event.title}
+          className="
+            absolute
+            inset-0
+            w-full
+            h-full
+            object-cover
+            transition-transform
+            duration-700
+            hover:scale-105
+          "
+        />
 
-        {/* Date */}
-        <div className="inline-block bg-[#0C08B7]/20 border border-[#7995CD]/30 text-[#AFC2FF] px-4 py-2 rounded-full mb-10">
-  {event.date}
-</div>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/55" />
 
-        {/* Image */}
-        <div className="overflow-hidden rounded-3xl shadow-2xl mb-10">
-  <img
-    src={event.image}
-    alt={event.title}
-    className="w-full h-[220px] md:h-[380px] object-cover"
-  />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto h-full px-6 flex flex-col justify-end pb-16">
+
+          <Link
+            to="/events"
+            className="
+              absolute
+              top-10
+              left-6
+              text-white
+              font-medium
+              hover:text-blue-300
+              transition
+            "
+          >
+            ← Back to Events
+          </Link>
+
+          <div
+            className="
+              inline-flex
+              w-fit
+              items-center
+              px-4
+              py-2
+              rounded-full
+              bg-blue-500/20
+              backdrop-blur-md
+              border
+              border-white/20
+              text-white
+              mb-6
+            "
+          >
+            E-Cell IIT Indore Event
+          </div>
+
+          <h1
+            className="
+              text-5xl
+              md:text-7xl
+              font-bold
+              text-white
+              leading-none
+              tracking-tight
+              max-w-4xl
+            "
+          >
+            {event.title}
+          </h1>
+
+          <div className="flex items-center gap-3 mt-6">
+            <span className="w-2 h-2 rounded-full bg-yellow-400" />
+            <span className="text-yellow-300 font-semibold text-lg">
+              {event.date}
+            </span>
+          </div>
+
+          <p className="mt-6 text-white/90 text-lg md:text-xl max-w-3xl leading-relaxed">
+            {event.shortDesc}
+          </p>
+
+        </div>
+      </div>
+
+      {/* CONTENT SECTION */}
+      <div className="max-w-7xl mx-auto px-6 py-20">
+
+        {/* INFO CARDS */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              p-6
+              shadow-md
+              border
+              border-slate-100
+              transition-all
+              duration-300
+              hover:-translate-y-2
+              hover:shadow-xl
+            "
+          >
+            <p className="text-sm text-slate-500 mb-2">
+              Event Date
+            </p>
+            <h3 className="text-xl font-semibold text-[#1E2A78]">
+              {event.date}
+            </h3>
+          </div>
+
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              p-6
+              shadow-md
+              border
+              border-slate-100
+              transition-all
+              duration-300
+              hover:-translate-y-2
+              hover:shadow-xl
+            "
+          >
+            <p className="text-sm text-slate-500 mb-2">
+              Category
+            </p>
+            <h3 className="text-xl font-semibold text-[#1E2A78]">
+              Entrepreneurship
+            </h3>
+          </div>
+
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              p-6
+              shadow-md
+              border
+              border-slate-100
+              transition-all
+              duration-300
+              hover:-translate-y-2
+              hover:shadow-xl
+            "
+          >
+            <p className="text-sm text-slate-500 mb-2">
+              Venue
+            </p>
+            <h3 className="text-xl font-semibold text-[#1E2A78]">
+              IIT Indore
+            </h3>
+          </div>
 
         </div>
 
-        {/* Description */}
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8">
-            About This Event
-          </h2>
+        {/* ABOUT SECTION */}
+        <div className="relative group">
 
-          <p className="text-gray-300 text-lg leading-10 whitespace-pre-line">
-            {event.fullDesc}
-          </p>
+          {/* Glow Effect */}
+          <div
+            className="
+              absolute
+              -inset-2
+              rounded-[36px]
+              bg-gradient-to-r
+              from-blue-500/20
+              via-indigo-500/20
+              to-purple-500/20
+              blur-xl
+              opacity-0
+              group-hover:opacity-100
+              transition-all
+              duration-500
+            "
+          />
+
+          <div
+            className="
+              relative
+              bg-white
+              rounded-[32px]
+              shadow-xl
+              border
+              border-slate-100
+              overflow-hidden
+              transition-all
+              duration-500
+              group-hover:-translate-y-2
+              group-hover:shadow-2xl
+            "
+          >
+
+            {/* Top Gradient Bar */}
+            <div className="h-2 bg-gradient-to-r from-[#3461FF] via-[#5B4DFF] to-[#8B5CF6]" />
+
+            <div className="p-8 md:p-14">
+
+              <h2
+                className="
+                  text-4xl
+                  font-bold
+                  text-[#1E2A78]
+                  mb-8
+                  transition-all
+                  duration-500
+                  group-hover:text-[#3461FF]
+                "
+              >
+                About This Event
+              </h2>
+
+              <p className="text-slate-600 text-lg leading-10 whitespace-pre-line">
+                {event.fullDesc}
+              </p>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 
