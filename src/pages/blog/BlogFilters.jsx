@@ -1,4 +1,4 @@
-import blogs from "../../Data/blog"
+import blogs from "../../data/blog"
 
 import { HiSearch } from "react-icons/hi";
 
