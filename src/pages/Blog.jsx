@@ -1,39 +1,39 @@
 import { useState } from 'react'
-import BlogHero from './blog/BlogHero'
-import BlogGrid from './blog/BlogGrid'
-import BlogFilters from './blog/BlogFilters'
-import FeaturedBlog from './blog/FeaturedBlog'
+import BlogHero from './light blog/Hero'
+import BlogGrid from './light blog/Grid'
+import BlogFilters from './light blog/Filters'
+import FeaturedBlog from './light blog/Featured'
 
 export default function Blog() {
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedTag, setSelectedTag] = useState('All')
 
     return (
-        // <div className="-mx-4 sm:-mx-6 lg:-mx-8">
-        <div
-            className="
-        min-h-screen
-        bg-gradient-to-b
-        from-black
-        via-[#04052E]
-        to-black
-      "
-        >
+        <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-indigo-100">
             <BlogHero />
-            <div className="mt-16">
+            
+            {/* Featured Blog with bottom margin for gap */}
+            <div className="mt-16 mb-12 px-4">
                 <FeaturedBlog />
             </div>
 
-            <BlogFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+            {/* Filters with consistent side padding */}
+            <div className="px-4">
+                <BlogFilters 
+                    searchTerm={searchTerm} 
+                    setSearchTerm={setSearchTerm} 
+                    selectedTag={selectedTag} 
+                    setSelectedTag={setSelectedTag} 
+                />
+            </div>
 
+            {/* Latest Articles section */}
             <section className="px-4 py-10">
-                <h2 className=" mb-8 text-3xl font-bold text-white ">
+                <h2 className="mb-8 text-3xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
                     Latest Articles
                 </h2>
-
                 <BlogGrid searchTerm={searchTerm} selectedTag={selectedTag} />
             </section>
         </div>
-        // </div>
     )
 }
