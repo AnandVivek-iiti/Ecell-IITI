@@ -14,7 +14,7 @@ import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Events from './pages/Events'
 import Blog from './pages/Blog'
-import BlogDetails from './pages/BlogDetails'
+import BlogDetails from './pages/light blog/Details'
 
 function AppContent() {
   const location = useLocation()
@@ -33,7 +33,7 @@ function AppContent() {
       <ScrollToTop />
       <Navbar />
 
-<main className={`flex-grow px-4 py-0 sm:px-6 lg:px-0 route-transition ${pageReady ? 'page-visible' : ''}`}>
+<main className={`flex-grow px-0 py-0 sm:px-6 lg:px-0 route-transition ${pageReady ? 'page-visible' : ''}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
