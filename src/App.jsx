@@ -8,7 +8,7 @@ import ScrollToTop from './components/ScrollToTop'
 import useScrollReveal from './hooks/useScrollReveal'
 import Home from './pages/light theme/homee'
 import About from './pages/About'
-import Outreach from './pages/Outreach'
+import ESummitOutreachPage from './pages/Outreach'
 import Team from './pages/Team'
 import Gallery from './pages/Gallery Page/Gallery'
 import Contact from './pages/Contact'
@@ -38,7 +38,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/outreach" element={<Outreach />} />
+          <Route path="/outreach" element={<ESummitOutreachPage />} />
           <Route path="/team" element={<Team />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/events" element={<Events />} />
