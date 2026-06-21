@@ -2,8 +2,8 @@ import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const socials = [
-  { icon: FaLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com' },
-  { icon: FaInstagram, label: 'Instagram', href: 'https://www.instagram.com' },
+  { icon: FaLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/ecell-iiti/' },
+  { icon: FaInstagram, label: 'Instagram', href: 'https://www.instagram.com/ecelliitindore/' },
   { icon: FaTwitter, label: 'Twitter', href: 'https://www.twitter.com' },
 ]
 
