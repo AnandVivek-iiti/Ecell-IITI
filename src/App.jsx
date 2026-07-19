@@ -2,11 +2,11 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Navbar from './pages/light theme/nav'
-import Footer from './pages/light theme/fot'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import useScrollReveal from './hooks/useScrollReveal'
-import Home from './pages/light theme/homee'
+import Home from './pages/Home'
 import About from './pages/About'
 import Outreach from './pages/Outreach'
 import Team from './pages/Team'
@@ -14,7 +14,7 @@ import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Events from './pages/Events'
 import Blog from './pages/Blog'
-import BlogDetails from './pages/light blog/Details'
+import BlogDetails from './pages/blog/Details'
 
 function AppContent() {
   const location = useLocation()

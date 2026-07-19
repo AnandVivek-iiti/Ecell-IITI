@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import BlogHero from './light blog/Hero'
-import BlogGrid from './light blog/Grid'
-import BlogFilters from './light blog/Filters'
-import FeaturedBlog from './light blog/Featured'
+import BlogHero from './blog/Hero'
+import BlogGrid from './blog/Grid'
+import BlogFilters from './blog/Filters'
+import FeaturedBlog from './blog/Featured'
 
 export default function Blog() {
     const [searchTerm, setSearchTerm] = useState('')
