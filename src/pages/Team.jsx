@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import TEAM_DATA from "../Data/team.js";
+import TEAM_DATA from "../data/team.js";
 
 // SVG ICONS
 const IconLinkedIn = () => (

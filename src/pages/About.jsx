@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { sponsorData } from '../Data/sponsors';
+import { sponsorData } from '../data/sponsors';
 
 const SpotlightCard = ({ children }) => {
   const divRef = useRef(null);

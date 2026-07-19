@@ -1,5 +1,5 @@
 import React from "react";
-import { events } from "../Data/event";
+import { events } from "../data/event";
 import { useNavigate } from "react-router-dom";
 
 const Events = () => {
