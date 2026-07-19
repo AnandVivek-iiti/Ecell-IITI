@@ -8,13 +8,16 @@ import ScrollToTop from './components/ScrollToTop'
 import useScrollReveal from './hooks/useScrollReveal'
 import Home from './pages/Home'
 import About from './pages/About'
-import Outreach from './pages/Outreach'
+import ESummitOutreachPage from './pages/Outreach'
 import Team from './pages/Team'
-import Gallery from './pages/Gallery'
+import Gallery from './pages/Gallery Page/Gallery'
 import Contact from './pages/Contact'
 import Events from './pages/Events'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/blog/Details'
+
+import EventDetails from "./pages/EventDetails";
+
 
 function AppContent() {
   const location = useLocation()
@@ -37,7 +40,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/outreach" element={<Outreach />} />
+          <Route path="/outreach" element={<ESummitOutreachPage />} />
           <Route path="/team" element={<Team />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/events" element={<Events />} />
@@ -45,6 +48,8 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
         </Routes>
       </main>
 

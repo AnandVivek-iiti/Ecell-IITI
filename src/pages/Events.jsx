@@ -1,115 +1,197 @@
-import React, { useState, useEffect } from "react";
-import { events } from "../Data/event";
-
+import React from "react";
+import { events } from "../data/event";
+import { useNavigate } from "react-router-dom";
 
 const Events = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#01031F] via-[#02042A] to-[#03053A] py-16 px-7 md:px-10">
-      {/* Hero Section */}
-      <div className="text-center mb-16">
-       <h1 className="text-4xl md:text-7xl font-bold text-white">
-          E-Cell Events
-        </h1>
+    <section className="relative min-h-screen bg-gradient-to-b from-[#EEF2FE] via-white to-[#F8FAFF] py-20 px-6 md:px-10 overflow-hidden">
 
-        <p className="max-w-4xl mx-auto mt-8 text-lg md:text-xl text-blue-100 leading-relaxed">
-          Discover and participate in inspiring events organized by E-Cell IIT
-          Indore. From startup bootcamps and entrepreneurship workshops to
-          networking sessions, founder talks, and innovation challenges, we
-          empower students to transform ideas into impactful ventures.
-        </p>
+      {/* Background Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+        <div
+          className="
+            absolute
+            top-[-150px]
+            left-[-150px]
+            w-[500px]
+            h-[500px]
+            rounded-full
+            bg-blue-300/20
+            blur-[120px]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-[-100px]
+            right-[-100px]
+            w-[450px]
+            h-[450px]
+            rounded-full
+            bg-indigo-300/20
+            blur-[120px]
+          "
+        />
+
       </div>
 
-      {/* Event Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event) => (
-          <div
-            key={event.id}
-            className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
-          >
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-60 object-cover"
-            />
+      <div className="relative z-10 max-w-7xl mx-auto">
 
-            <div className="p-6">
-              <div className="inline-block bg-slate-700 text-white text-sm px-4 py-2 rounded-full mb-4">
-                Past Event
+        {/* Hero Section */}
+        <div className="max-w-4xl mb-20">
+
+          <p className="uppercase tracking-[0.35em] text-[#3461FF] text-sm font-medium mb-6">
+            E-CELL IIT INDORE
+          </p>
+
+          <h1
+            className="
+              text-5xl
+              md:text-6xl
+              font-bold
+              leading-tight
+              bg-gradient-to-r
+              from-[#1E2A78]
+              via-[#3461FF]
+              to-[#5B4DFF]
+              bg-clip-text
+              text-transparent
+            "
+          >
+            Events & Experiences
+          </h1>
+
+          <p className="mt-8 text-lg text-slate-600 leading-9 max-w-3xl">
+            Discover competitions, startup showcases, entrepreneurial
+            workshops, founder talks and innovation-driven experiences
+            organized by E-Cell IIT Indore.
+          </p>
+
+          <div className="mt-8 flex items-center gap-3 text-[#F59E0B] font-medium">
+            <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
+            Building India's Startup Culture
+          </div>
+
+        </div>
+
+        {/* Event Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {events.map((event) => (
+            <div
+              key={event.id}
+              className="
+                group
+                bg-white
+                rounded-[28px]
+                overflow-hidden
+                border
+                border-[#E2E8F0]
+                shadow-sm
+                hover:-translate-y-2
+                hover:shadow-xl
+                transition-all
+                duration-300
+              "
+            >
+
+              {/* Image */}
+              <div className="overflow-hidden">
+
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="
+                    w-full
+                    h-60
+                    object-cover
+                    transition-transform
+                    duration-500
+                    group-hover:scale-105
+                  "
+                />
+
               </div>
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 h-10 flex items-start">
-  {event.title}
-</h3>
+              {/* Content */}
+              <div className="p-7">
 
-              <p className="text-gray-600 h-12 line-clamp-3 mb-5">
-  {event.shortDesc}
-</p>
+                <div className="flex items-center justify-between mb-4">
 
-              <p className="text-blue-600 font-medium mb-6">{event.date}</p>
+                  <span className="text-[#F59E0B] font-semibold text-sm">
+                    {event.date}
+                  </span>
 
-             <button
-  onClick={() => setSelectedEvent(event)}
-  className="mt-auto w-full py-3 rounded-xl bg-[#e8e9ed] text-blue-900 font-semibold border border-[#7d87a3] hover:bg-[#6982c9] transition-all duration-300"
->
-  Read More →
-</button>
+                  <span
+                    className="
+                      text-xs
+                      bg-[#EEF2FE]
+                      text-[#3461FF]
+                      px-3
+                      py-1
+                      rounded-full
+                      font-medium
+                    "
+                  >
+                    Event
+                  </span>
+
+                </div>
+
+                <h3
+                  className="
+                    text-2xl
+                    font-bold
+                    text-[#1E2A78]
+                    mb-4
+                    transition-colors
+                    duration-300
+                    group-hover:text-[#3461FF]
+                  "
+                >
+                  {event.title}
+                </h3>
+
+                <p className="text-slate-600 leading-7">
+                  {event.shortDesc}
+                </p>
+
+                <button
+                  onClick={() => navigate(`/events/${event.id}`)}
+                  className="
+                    mt-8
+                    px-6
+                    py-3
+                    rounded-full
+                    bg-gradient-to-r
+                    from-[#3461FF]
+                    to-[#5B4DFF]
+                    text-white
+                    font-medium
+                    shadow-md
+                    transition-all
+                    duration-300
+                    hover:scale-105
+                  "
+                >
+                  Read More →
+                </button>
+
+              </div>
+
             </div>
-          </div>
-        ))}
-      </div>
-{/*Modal for selected event */}
+          ))}
 
-{/* {selectedEvent && (
-  <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
+        </div>
 
-    <div
-      className="bg-white rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-        <h2 className="text-3xl font-bold">
-          {selectedEvent.title}
-        </h2>
-
-        <button
-          onClick={() => setSelectedEvent(null)}
-          className="text-4xl"
-        >
-          ×
-        </button>
       </div>
 
-      <img
-        src={selectedEvent.image}
-        alt={selectedEvent.title}
-        className="w-full h-96 object-cover"
-      />
-
-      <div className="p-8">
-        <p className="text-blue-600 font-semibold mb-4">
-          {selectedEvent.date}
-        </p>
-
-        <p className="text-gray-700 leading-8 text-lg">
-          {selectedEvent.fullDesc}
-        </p>
-      </div>
-    </div>
-
-  </div>
-)} */}
-
-
-    </div>
+    </section>
   );
 };
 
 export default Events;
-
-
-
-
-
-

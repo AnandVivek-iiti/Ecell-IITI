@@ -1,4 +1,4 @@
-import blogs from "../../Data/blog"
+import blogs from "../../data/blog"
 import { HiSearch } from "react-icons/hi";
 
 export default function BlogFilters({
@@ -37,7 +37,7 @@ export default function BlogFilters({
             group-focus-within:opacity-60
           "
         />
-        
+
         <div
           className="
             relative
