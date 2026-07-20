@@ -1,70 +1,123 @@
-import { useParams, Link } from 'react-router-dom'
-import blogs from '../../data/blog'
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import blogs from "../../data/blog";
 
 export default function BlogDetails() {
-  const { id } = useParams()
-  const blog = blogs.find((blog) => blog.id === Number(id))
+  const { id } = useParams();
+  const blog = blogs.find((blog) => blog.id === Number(id));
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-indigo-100 flex items-center justify-center">
+      <div className="flex mt-20 min-h-screen items-center justify-center bg-gradient-to-b from-blue-50 via-white to-indigo-50">
         <div className="text-center">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-black text-slate-900">
             Blog Not Found
           </h1>
-          <Link to="/blog" className="mt-4 inline-block text-blue-600 hover:text-blue-800">
-            ← Back to Blogs
+
+          <Link
+            to="/blog"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 px-6 py-3 font-semibold text-white"
+          >
+            <ArrowLeft size={18} />
+            Back to Blogs
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-indigo-100">
-      <div className="mx-auto max-w-5xl px-6 py-12">
-        {/* Back Button */}
+    <main className="relative mt-10 overflow-hidden bg-gradient-to-b from-blue-50 via-white to-indigo-50">
+
+      {/* Background */}
+
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+
+        <div className="absolute left-[-180px] top-0 h-[420px] w-[420px] rounded-full bg-blue-400/20 blur-[120px]" />
+
+        <div className="absolute right-[-180px] top-[420px] h-[420px] w-[420px] rounded-full bg-indigo-500/20 blur-[120px]" />
+
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 py-10">
+
+        {/* Back */}
+
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition hover:text-blue-800 group"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition hover:text-blue-700"
         >
-          <span className="transition-transform group-hover:-translate-x-1">←</span>
+          <ArrowLeft size={18} />
           Back to Blogs
         </Link>
 
-        {/* Blog Header */}
-        <div className="mt-8">
-          <span className="inline-block rounded-full bg-gradient-to-r from-blue-600/10 to-indigo-600/10 px-4 py-2 text-sm font-semibold text-blue-700 border border-blue-200/50">
-            #{blog.tag}
-          </span>
+        {/* Hero */}
 
-          <h1 className="mt-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent">
-            {blog.title}
-          </h1>
+        <section className="relative mt-8 overflow-hidden rounded-[40px]">
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-slate-600">
-            <span className="font-medium">{blog.author}</span>
-            <span>•</span>
-            <span>{blog.date}</span>
-            <span>•</span>
-            <span>{blog.readingTime}</span>
-          </div>
-        </div>
-
-        {/* Featured Image */}
-        <div className="mt-10 overflow-hidden rounded-3xl border border-blue-200/50 bg-white/40 shadow-lg shadow-blue-500/10">
           <img
             src={blog.image}
             alt={blog.title}
-            className="h-[350px] w-full object-cover transition duration-500 hover:scale-105"
+            className="h-[75vh] w-full object-cover"
           />
-        </div>
 
-        {/* Blog Content */}
-        <div className="mx-auto mt-12 max-w-3xl text-lg leading-8 text-slate-700 prose prose-slate">
-          {blog.content}
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+
+          <div className="absolute bottom-0 left-0 right-0 p-10 md:p-16">
+
+            <span className="inline-flex rounded-full bg-white/90 px-5 py-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-600 backdrop-blur-xl">
+
+              {blog.tag}
+
+            </span>
+
+            <h1 className="mt-6 max-w-5xl text-5xl font-black leading-tight text-white md:text-7xl">
+
+              {blog.title}
+
+            </h1>
+
+            <div className="mt-8 flex flex-wrap gap-6 text-white/90">
+
+              <div className="flex items-center gap-2">
+                <User size={18} />
+                {blog.author}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Calendar size={18} />
+                {blog.date}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Clock size={18} />
+                {blog.readingTime}
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        {/* Article */}
+
+        <section className="mx-auto -mt-20 max-w-5xl">
+
+          <div className="relative rounded-[40px] border border-slate-200 bg-white p-10 shadow-xl md:p-16">
+
+            <article className="prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-9">
+
+              {blog.content}
+
+            </article>
+
+          </div>
+
+        </section>
+
       </div>
-    </div>
-  )
+
+    </main>
+  );
 }

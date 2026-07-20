@@ -1,39 +1,84 @@
-import { useState } from 'react'
-import BlogHero from './blog/Hero'
-import BlogGrid from './blog/Grid'
-import BlogFilters from './blog/Filters'
-import FeaturedBlog from './blog/Featured'
+import { useState } from "react";
+import BlogHero from "./blog/Hero";
+import BlogGrid from "./blog/Grid";
+import BlogFilters from "./blog/Filters";
+import FeaturedBlog from "./blog/Featured";
 
 export default function Blog() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedTag, setSelectedTag] = useState('All')
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState("All");
 
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-indigo-100">
-            <BlogHero />
-            
-            {/* Featured Blog with bottom margin for gap */}
-            <div className="mt-16 mb-12 px-4">
-                <FeaturedBlog />
-            </div>
+  return (
+    <main className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-indigo-50">
 
-            {/* Filters with consistent side padding */}
-            <div className="px-4">
-                <BlogFilters 
-                    searchTerm={searchTerm} 
-                    setSearchTerm={setSearchTerm} 
-                    selectedTag={selectedTag} 
-                    setSelectedTag={setSelectedTag} 
-                />
-            </div>
+      {/* Background */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
 
-            {/* Latest Articles section */}
-            <section className="px-4 py-10">
-                <h2 className="mb-8 text-3xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
-                    Latest Articles
-                </h2>
-                <BlogGrid searchTerm={searchTerm} selectedTag={selectedTag} />
-            </section>
-        </div>
-    )
+        <div className="absolute left-[-180px] top-0 h-[420px] w-[420px] rounded-full bg-blue-400/20 blur-[120px]" />
+
+        <div className="absolute right-[-180px] top-[420px] h-[420px] w-[420px] rounded-full bg-indigo-500/20 blur-[120px]" />
+
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6">
+
+        {/* Hero */}
+        <BlogHero />
+
+        {/* Featured */}
+        <section className="pb-24">
+          <FeaturedBlog />
+        </section>
+
+        {/* Filters */}
+        <section className="pb-20">
+          <BlogFilters
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedTag={selectedTag}
+            setSelectedTag={setSelectedTag}
+          />
+        </section>
+
+        {/* Articles */}
+        <section className="pb-28">
+
+          <div className="mb-16 text-center">
+
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/70 px-6 py-2 text-sm font-semibold uppercase tracking-[0.28em] text-blue-700 backdrop-blur-xl">
+
+              Latest Stories
+
+            </span>
+
+            <h2 className="mt-8 text-5xl font-black leading-tight md:text-6xl">
+
+              <span className="text-slate-900">
+                Startup
+              </span>
+
+              <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+                Insights
+              </span>
+
+            </h2>
+
+            <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-slate-600">
+              Read founder journeys, startup lessons, entrepreneurial
+              insights and stories from the E-Cell IIT Indore ecosystem.
+            </p>
+
+          </div>
+
+          <BlogGrid
+            searchTerm={searchTerm}
+            selectedTag={selectedTag}
+          />
+
+        </section>
+
+      </div>
+
+    </main>
+  );
 }
