@@ -17,7 +17,7 @@ const navItems = [
   { name: "Events", href: "/events" },
   { name: "Blog", href: "/blog" },
   { name: "Outreach", href: "/outreach" },
-  { name: "Contact", href: "/contact" },
+
 ];
 
 export default function Navbar() {

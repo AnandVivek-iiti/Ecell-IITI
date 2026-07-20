@@ -16,7 +16,7 @@ import Events from './pages/Events'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/blog/Details'
 
-import EventDetails from "./pages/EventDetails";
+import EventDetails from "./pages/Events/EventDetails";
 
 
 function AppContent() {

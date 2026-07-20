@@ -1,55 +1,59 @@
-import blogs from "../../data/blog"
-
-import BlogCard from './BlogCard'
+import blogs from "../../data/blog";
+import BlogCard from "./BlogCard";
 
 export default function BlogGrid({
   searchTerm,
   selectedTag,
 }) {
+  const filteredBlogs = blogs.filter((blog) => {
+    const matchesSearch = blog.title
+      .toLowerCase()
+      .includes((searchTerm || "").toLowerCase());
 
-  const filteredBlogs = blogs.filter((blog) =>{
+    const matchesTag =
+      selectedTag === "All" || blog.tag === selectedTag;
 
-    const matchesSearch = blog.title.toLowerCase().includes((searchTerm || "").toLowerCase())
+    return matchesSearch && matchesTag;
+  });
 
-    const matchesTag = selectedTag === 'All' || blog.tag === selectedTag
+  if (filteredBlogs.length === 0) {
+    return (
+      <section className="py-24">
+        <div className="mx-auto max-w-2xl rounded-[36px] border border-slate-200 bg-white p-16 text-center shadow-sm">
 
-    return matchesSearch && matchesTag
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-3xl text-white">
+            🔍
+          </div>
+
+          <h3 className="mt-8 text-3xl font-bold text-slate-900">
+            No Articles Found
+          </h3>
+
+          <p className="mx-auto mt-4 max-w-md text-lg leading-8 text-slate-600">
+            We couldn't find any articles matching your search.
+            Try another keyword or select a different category.
+          </p>
+
+        </div>
+      </section>
+    );
   }
-);
-
-if (filteredBlogs.length === 0) {
-  return (
-    <p className="text-center text-lg">
-      <div className="py-20 text-center" >
-
-  <h3 className="text-2xl font-semibold text-white">
-    No Articles Found
-  </h3>
-
-  <p className="mt-2 text-slate-400">
-    Try a different search term or category.
-  </p>
-
-</div>
-    </p>
-  )
-}
 
   return (
-    <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <section className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
 
       {filteredBlogs.map((blog) => (
         <BlogCard
-          key = {blog.id}
+          key={blog.id}
+          id={blog.id}
           title={blog.title}
-          date={blog.date}
-          tag={blog.tag}
-          image={blog.image}
           description={blog.description}
-          id = {blog.id}
+          image={blog.image}
+          tag={blog.tag}
+          date={blog.date}
         />
       ))}
 
     </section>
-  )
+  );
 }

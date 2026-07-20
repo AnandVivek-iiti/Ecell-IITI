@@ -1,98 +1,74 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 export default function BlogCard({
-    title,
-    description,
-    date,
-    tag,
-    image,
-    id,
+  title,
+  description,
+  date,
+  tag,
+  image,
+  id,
 }) {
-    return (
-        <Link to={`/blog/${id}`} className="block">
-            <div
-                className="
-                    group
-                    h-full
-                    flex
-                    flex-col
-                    overflow-hidden
-                    rounded-3xl
-                    bg-white/80
-                    backdrop-blur-sm
-                    border
-                    border-blue-200/50
-                    shadow-lg
-                    shadow-blue-500/10
-                    transition-all
-                    duration-500
-                    hover:-translate-y-2
-                    hover:border-blue-300/60
-                    hover:shadow-xl
-                    hover:shadow-blue-500/20
-                "
-            >
-                <div className="overflow-hidden">
-                    <img
-                        src={image}
-                        alt={title}
-                        className="
-                            h-52
-                            w-full
-                            object-cover
-                            transition
-                            duration-500
-                            group-hover:scale-110
-                        "
-                    />
-                </div>
+  return (
+    <Link
+      to={`/blog/${id}`}
+      className="group block"
+    >
+      <article className="overflow-hidden rounded-[36px] border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-blue-200 hover:shadow-[0_30px_80px_rgba(59,130,246,.12)]">
 
-                <div className="p-4 flex flex-col flex-1 bg-gradient-to-br from-white to-blue-50/30">
-                    <span
-                        className="
-                            w-fit
-                            rounded-full
-                            bg-gradient-to-r
-                            from-blue-600/10
-                            to-indigo-600/10
-                            px-3
-                            py-1
-                            text-xs
-                            font-semibold
-                            text-blue-700
-                            border
-                            border-blue-200/50
-                        "
-                    >
-                        #{tag}
-                    </span>
+        {/* Image */}
 
-                    <h3 className="mt-3 text-xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
-                        {title}
-                    </h3>
+        <div className="relative h-72 overflow-hidden">
 
-                    <p className="mt-2 text-blue-800/70 leading-relaxed">
-                        {description}
-                    </p>
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
 
-                    <p className="mt-2 text-sm text-blue-600/70">
-                        {date}
-                    </p>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent transition-opacity duration-500 group-hover:opacity-100" />
 
-                    <div className="mt-4 flex items-center gap-2 text-blue-600 font-semibold">
-                        Read Article
-                        <span
-                            className="
-                                transition-transform
-                                duration-300
-                                group-hover:translate-x-1
-                            "
-                        >
-                            →
-                        </span>
-                    </div>
-                </div>
+          <div className="absolute left-6 top-6 rounded-full bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-blue-600 backdrop-blur-xl">
+
+            {tag}
+
+          </div>
+
+        </div>
+
+        {/* Content */}
+
+        <div className="flex min-h-[260px] flex-col p-8">
+
+          <p className="text-sm font-semibold text-amber-500">
+            {date}
+          </p>
+
+          <h3 className="mt-4 text-[30px] font-bold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-blue-600">
+            {title}
+          </h3>
+
+          <p className="mt-4 flex-1 text-base leading-8 text-slate-600">
+            {description}
+          </p>
+
+          <div className="mt-8 flex items-center justify-between border-t border-slate-200 pt-6">
+
+            <span className="text-sm font-semibold text-slate-500">
+              Read Article
+            </span>
+
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white transition-all duration-300 group-hover:translate-x-1 group-hover:scale-105">
+
+              <ArrowUpRight size={18} />
+
             </div>
-        </Link>
-    )
+
+          </div>
+
+        </div>
+
+      </article>
+    </Link>
+  );
 }

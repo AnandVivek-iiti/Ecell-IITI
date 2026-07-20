@@ -1,399 +1,242 @@
-import { useState, useRef } from "react";
-import TEAM_DATA from "../data/team.js";
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import TEAM_DATA from "../data/team";
+import { FaLinkedin, FaInstagram } from "react-icons/fa";
+import { Users, Sparkles, ArrowRight } from "lucide-react";
+import Reveal from "../components/ui/Reveal";
+import SectionHeading from "../components/ui/SectionHeading";
+import GlassCard from "../components/ui/GlassCard";
+import GradientButton from "../components/ui/GradientButton";
 
-// SVG ICONS
-const IconLinkedIn = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
-    <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-  </svg>
-);
-const IconInstagram = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-  </svg>
-);
+// ─── Person Card ──────────────────────────────────────────────────────────
+function PersonCard({ member, variant = "member" }) {
+  const accent =
+    variant === "board"
+      ? "from-amber-500 to-orange-500"
+      : "from-blue-600 to-indigo-600";
 
-// PHOTO / AVATAR
-function PersonPhoto({ photo, initials, size, accent, index }) {
-  const [imgError, setImgError] = useState(false);
-  const bg = `hsl(${(index * 47) % 360}, 70%, 95%)`;
+  const avatarSize = variant === "board" ? "h-36 w-36" : "h-28 w-28";
 
-  if (photo && !imgError) {
-    return (
-      <div style={{
-        width: size, height: size, borderRadius: "50%", overflow: "hidden",
-        border: `3px solid ${accent}55`,
-        boxShadow: `0 0 0 4px rgba(255,255,255,0.6), 0 10px 24px rgba(0,0,0,0.1)`,
-        flexShrink: 0, position: "relative", background: "#ffffff"
-      }}>
-        <img 
-          src={photo} 
-          alt={initials} 
-          onError={() => setImgError(true)} 
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} 
-        />
-      </div>
-    );
-  }
-  
   return (
-    <div style={{
-      width: size, height: size, borderRadius: "50%", flexShrink: 0,
-      background: bg,
-      border: `2px solid ${accent}55`,
-      boxShadow: `0 0 0 4px rgba(255,255,255,0.6), 0 10px 24px rgba(0,0,0,0.1)`,
-      display: "flex", alignItems: "center", justifyContent: "center",
-      fontSize: size * 0.35, fontWeight: 800,
-      color: accent, letterSpacing: "0.02em", userSelect: "none",
-    }}>
-      {initials}
-    </div>
-  );
-}
-
-// SOCIAL BUTTON
-function SocialBtn({ href, accent, children }) {
-  const [hov, setHov] = useState(false);
-  if (!href) return null;
-  return (
-    <a href={href} target="_blank" rel="noreferrer"
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{
-        width: 36, height: 36, borderRadius: "50%", display: "flex",
-        alignItems: "center", justifyContent: "center", textDecoration: "none",
-        border: `1px solid ${hov ? accent : "rgba(255,255,255,0.8)"}`,
-        background: hov ? accent : "rgba(255,255,255,0.5)",
-        color: hov ? "#ffffff" : "#475569",
-        transition: "all 0.25s cubic-bezier(.4,0,.2,1)",
-        transform: hov ? "scale(1.15) translateY(-2px)" : "scale(1)",
-        boxShadow: hov ? `0 8px 16px ${accent}44` : "0 2px 4px rgba(0,0,0,0.02)",
+    <motion.div
+      whileHover={{
+        y: -12,
+        rotateX: 5,
+        rotateY: -5,
+        scale: 1.02,
       }}
-    >{children}</a>
-  );
-}
+      transition={{ type: "spring", stiffness: 250 }}
+      className="h-full"
+    >
+      <GlassCard className="group relative flex h-full flex-col items-center justify-center overflow-hidden rounded-[34px] px-8 py-10 text-center">
+        {/* Top accent bar */}
+        <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${accent}`} />
 
-// SECRETARY / BOARD CARD (Orange Theme)
-function SecretaryCard({ member, index }) {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [hov, setHov] = useState(false);
-  const ref = useRef(null);
-  
-  const accent = "#f59e0b"; 
+        {/* Glow behind avatar */}
+        <div
+          className={`absolute left-1/2 top-16 h-40 w-40 -translate-x-1/2 rounded-full bg-gradient-to-r ${accent} opacity-15 blur-3xl transition duration-500 group-hover:scale-125`}
+        />
 
-  const onMove = (e) => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const x = ((e.clientY - r.top) / r.height - 0.5) * -10;
-    const y = ((e.clientX - r.left) / r.width - 0.5) * 10;
-    setTilt({ x, y });
-  };
-  const onLeave = () => { setTilt({ x: 0, y: 0 }); setHov(false); };
-
-  return (
-    <div ref={ref} onMouseMove={onMove} onMouseEnter={() => setHov(true)} onMouseLeave={onLeave}
-      style={{ perspective: "1000px", cursor: "default", height: "100%" }}>
-      <div style={{
-        height: "100%",
-        borderRadius: 24,
-        // DYNAMIC ORANGE GRADIENT
-        background: hov ? "linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%)" : "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, #ffedd5 100%)",
-        backdropFilter: "blur(12px)",
-        border: `1px solid ${hov ? accent + "66" : "rgba(255,255,255,0.6)"}`,
-        padding: "36px 28px 28px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", gap: 0,
-        minHeight: 380, position: "relative", overflow: "hidden",
-        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${hov ? "translateY(-8px) scale(1.02)" : "scale(1)"}`,
-        transformStyle: "preserve-3d",
-        transition: "transform 0.4s cubic-bezier(.23,1,.32,1), border 0.3s, box-shadow 0.3s, background 0.3s",
-        boxShadow: hov ? `0 24px 48px rgba(245, 158, 11, 0.15), 0 0 0 1px ${accent}22` : "0 10px 30px rgba(0,0,0,0.06)",
-      }}>
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: 4,
-          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, opacity: hov ? 1 : 0.3,
-          transition: "opacity 0.3s",
-        }} />
-
-        <div style={{ marginBottom: 24, position: "relative" }}>
-          <div style={{
-            position: "absolute", inset: -10, borderRadius: "50%",
-            background: `radial-gradient(circle, ${accent}33 0%, transparent 70%)`,
-            filter: "blur(8px)", pointerEvents: "none", transform: hov ? "scale(1.2)" : "scale(1)", transition: "transform 0.4s",
-          }} />
-          <div style={{ transform: "translateZ(30px)" }}>
-             <PersonPhoto photo={member.photo} initials={member.initials} size={140} accent={accent} index={index} />
-          </div>
+        {/* Subtle light sweep (Apple-style) */}
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="absolute -left-24 top-0 h-full w-24 -skew-x-12 bg-white/30 blur-xl transition-all duration-700 group-hover:left-[120%]" />
         </div>
 
-        <div style={{
-          fontSize: 22, fontWeight: 800,
-          color: "#1c2e65", letterSpacing: "-0.01em", textAlign: "center",
-          marginBottom: 8, lineHeight: 1.2, transform: "translateZ(20px)"
-        }}>{member.name}</div>
-
-        <div style={{
-          fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#d97706",
-          padding: "6px 16px", borderRadius: 24, background: "rgba(254, 243, 199, 0.8)", 
-          marginBottom: 18, transform: "translateZ(20px)"
-        }}>{member.position}</div>
-
-        <div style={{ display: "flex", gap: 12, transform: "translateZ(20px)" }}>
-          <SocialBtn href={member.linkedin} accent={accent}><IconLinkedIn /></SocialBtn>
-          <SocialBtn href={member.instagram} accent={accent}><IconInstagram /></SocialBtn>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// LEADER CARD (Blue Theme)
-function MemberCard({ member, index }) {
-  const [hov, setHov] = useState(false);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const ref = useRef(null);
-  
-  const accent = "#465de5"; 
-
-  const onMove = (e) => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const x = ((e.clientY - r.top) / r.height - 0.5) * -8;
-    const y = ((e.clientX - r.left) / r.width - 0.5) * 8;
-    setTilt({ x, y });
-  };
-
-  return (
-    <div ref={ref} onMouseMove={onMove} onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHov(false); }}
-      style={{ perspective: "900px", cursor: "default", height: "100%" }}>
-      <div style={{
-        height: "100%", borderRadius: 24, 
-        // DYNAMIC BLUE/INDIGO GRADIENT
-        background: hov ? "linear-gradient(135deg, #eff6ff 0%, #c7d2fe 100%)" : "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, #e0e7ff 100%)", 
-        backdropFilter: "blur(12px)",
-        border: `1px solid ${hov ? accent + "55" : "rgba(255,255,255,0.6)"}`, padding: "32px 24px 24px",
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: 340,
-        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${hov ? "translateY(-6px) scale(1.02)" : "scale(1)"}`,
-        transformStyle: "preserve-3d", position: "relative", overflow: "hidden",
-        transition: "transform 0.4s cubic-bezier(.23,1,.32,1), border 0.3s, box-shadow 0.3s, background 0.3s",
-        boxShadow: hov ? `0 24px 48px rgba(70, 93, 229, 0.15)` : "0 10px 24px rgba(0,0,0,0.05)",
-      }}>
-        
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: 4,
-          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, opacity: hov ? 1 : 0.3,
-          transition: "opacity 0.3s",
-        }} />
-
-        <div style={{ marginBottom: 22, position: "relative", transform: "translateZ(28px)" }}>
-          <div style={{
-            position: "absolute", inset: -10, borderRadius: "50%",
-            background: `radial-gradient(circle, ${accent}33 0%, transparent 70%)`, filter: "blur(8px)", pointerEvents: "none",
-            transform: hov ? "scale(1.18)" : "scale(1)", transition: "transform 0.4s",
-          }} />
-          <PersonPhoto photo={member.photo} initials={member.initials} size={120} accent={accent} index={index} />
+        {/* Avatar – centered horizontally via flex column + items-center */}
+        <div className="relative flex items-center justify-center">
+          {member.photo ? (
+            <img
+              src={member.photo}
+              alt={member.name}
+              className={`${avatarSize} rounded-full object-cover ring-4 ring-white shadow-2xl`}
+            />
+          ) : (
+            <div
+              className={`${avatarSize} flex items-center justify-center rounded-full bg-gradient-to-r ${accent} text-4xl font-bold text-white shadow-2xl`}
+            >
+              {member.initials}
+            </div>
+          )}
         </div>
 
-        <div style={{
-          fontSize: 20, fontWeight: 800, color: "#1c2e65", textAlign: "center", marginBottom: 8, lineHeight: 1.2, transform: "translateZ(20px)"
-        }}>{member.name}</div>
-
-        <div style={{
-          fontSize: 10, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 700, textAlign: "center",
-          padding: "6px 14px", borderRadius: 24, background: "rgba(255, 255, 255, 0.7)", marginBottom: 18, transform: "translateZ(20px)"
-        }}>{member.position}</div>
-
-        <div style={{ display: "flex", gap: 10, transform: "translateZ(20px)" }}>
-          <SocialBtn href={member.linkedin} accent={accent}><IconLinkedIn /></SocialBtn>
-          <SocialBtn href={member.instagram} accent={accent}><IconInstagram /></SocialBtn>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// TEAM VOLUNTEER BADGE (Alternating Blue and Teal Themes)
-function VolBadge({ member, index, isBlueTheme }) {
-  const [hov, setHov] = useState(false);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const ref = useRef(null);
-  
-  const accent = isBlueTheme ? "#465de5" : "#0d9488"; 
-
-  // DYNAMIC GRADIENTS BASED ON THEME
-  const bgDefault = isBlueTheme 
-    ? "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, #dbeafe 100%)" 
-    : "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, #ccfbf1 100%)";
-  
-  const bgHover = isBlueTheme 
-    ? "linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%)" 
-    : "linear-gradient(135deg, #f0fdfa 0%, #99f6e4 100%)";
-
-  const onMove = (e) => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const x = ((e.clientY - r.top) / r.height - 0.5) * -6;
-    const y = ((e.clientX - r.left) / r.width - 0.5) * 6;
-    setTilt({ x, y });
-  };
-  const onLeave = () => { setTilt({ x: 0, y: 0 }); setHov(false); };
-
-  return (
-    <div ref={ref} onMouseMove={onMove} onMouseEnter={() => setHov(true)} onMouseLeave={onLeave}
-      style={{ perspective: "900px", cursor: "default", height: "100%" }}>
-      <div style={{
-        height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", padding: "26px 20px 22px", minHeight: 280, 
-        borderRadius: 24, position: "relative", overflow: "hidden", 
-        background: hov ? bgHover : bgDefault, 
-        backdropFilter: "blur(12px)",
-        border: `1px solid ${hov ? accent + "55" : "rgba(255,255,255,0.6)"}`,
-        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${hov ? "translateY(-4px) scale(1.02)" : "scale(1)"}`,
-        transformStyle: "preserve-3d",
-        boxShadow: hov ? `0 20px 32px ${accent}22` : "0 6px 16px rgba(0,0,0,0.04)",
-        transition: "transform 0.4s cubic-bezier(.23,1,.32,1), border 0.3s, box-shadow 0.3s, background 0.3s",
-      }}>
-        
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, opacity: hov ? 1 : 0.2,
-          transition: "opacity 0.3s",
-        }} />
-
-        <div style={{ marginBottom: 18, position: "relative", transform: "translateZ(28px)" }}>
-          <div style={{ position: "absolute", inset: -8, borderRadius: "50%", background: `radial-gradient(circle, ${accent}33 0%, transparent 70%)`, filter: "blur(7px)", pointerEvents: "none", transform: hov ? "scale(1.15)" : "scale(1)", transition: "transform 0.4s" }} />
-          <PersonPhoto photo={member.photo} initials={member.initials} size={100} accent={accent} index={index} />
-        </div>
-        
-        <div style={{ fontSize: 17, fontWeight: 800, color: "#1c2e65", lineHeight: 1.2, textAlign: "center", marginBottom: 12, transform: "translateZ(20px)" }}>
+        {/* Name */}
+        <h3 className="mt-7 text-2xl font-bold leading-tight text-slate-900">
           {member.name}
-        </div>
+        </h3>
 
-        <div style={{ display: "flex", gap: 8, marginTop: "auto", transform: "translateZ(20px)" }}>
-          <SocialBtn href={member.linkedin} accent={accent}><IconLinkedIn /></SocialBtn>
-          <SocialBtn href={member.instagram} accent={accent}><IconInstagram /></SocialBtn>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// HEADER
-function SectionHeader({ label, accent }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 6, height: 28, background: accent, borderRadius: 4 }} />
-        <span style={{ fontFamily: "'Kaushan Script', cursive", fontSize: 36, fontWeight: 400, color: "#1c2e65", letterSpacing: "0.02em" }}>
-          {label}
+        {/* Position badge */}
+        <span
+          className={`mt-3 rounded-full bg-gradient-to-r ${accent} px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white`}
+        >
+          {member.position}
         </span>
-      </div>
-    </div>
+
+        {/* Social icons with enhanced hover animations */}
+        <div className="mt-6 flex items-center justify-center gap-4">
+          {member.linkedin && (
+            <motion.a
+              href={member.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{
+                y: -6,
+                scale: 1.18,
+              }}
+              whileTap={{ scale: 0.92 }}
+              transition={{
+                type: "spring",
+                stiffness: 500,
+                damping: 15,
+              }}
+              className="group flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition-colors duration-300 hover:border-[#0077B5] hover:bg-[#0077B5] hover:text-white"
+            >
+              <FaLinkedin
+                size={20}
+                className="transition-transform duration-300 group-hover:scale-125"
+              />
+            </motion.a>
+          )}
+
+          {member.instagram && (
+            <motion.a
+              href={member.instagram}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{
+                y: -6,
+                scale: 1.18,
+              }}
+              whileTap={{ scale: 0.92 }}
+              transition={{
+                type: "spring",
+                stiffness: 500,
+                damping: 15,
+              }}
+              // Fixed: removed `transition-all`, using `transition-colors` only
+              className="group flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition-colors duration-300 hover:border-pink-500 hover:bg-gradient-to-r hover:from-pink-500 hover:via-fuchsia-500 hover:to-orange-400 hover:text-white"
+            >
+              <FaInstagram
+                size={20}
+                className="transition-transform duration-300 group-hover:scale-125"
+              />
+            </motion.a>
+          )}
+        </div>
+      </GlassCard>
+    </motion.div>
   );
 }
 
-// MAIN COMPONENT
-export default function Team() {
+// ─── Team Section ────────────────────────────────────────────────────────
+function TeamSection({ title, members, variant = "member" }) {
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
-        .team-wrap *, .team-wrap *::before, .team-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        .team-wrap a { text-decoration: none; }
-        .team-wrap, .team-content { width: 100%; max-width: 100%; overflow-x: clip; }
-        .sec-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .mem-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-        .vol-grid  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .orb { position: absolute; border-radius: 50%; pointer-events: none; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.7s cubic-bezier(.16, 1, .3, 1) both; }
-        @media (max-width: 1024px) {
-          .sec-grid { grid-template-columns: repeat(2, 1fr); }
-          .mem-grid { grid-template-columns: repeat(2, 1fr); }
-          .vol-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-          .sec-grid, .mem-grid { grid-template-columns: 1fr; }
-          .vol-grid { grid-template-columns: repeat(2, 1fr); }
-          .team-content { padding-left: 20px !important; padding-right: 20px !important; }
-        }
-        @media (max-width: 520px) {
-          .vol-grid { grid-template-columns: 1fr; }
-          .team-content { padding-left: 16px !important; padding-right: 16px !important; }
-        }
-      `}</style>
-
-      {/* DEEPER SHADED BACKGROUND WRAPPER */}
-      <div className="team-wrap" style={{ 
-        background: "linear-gradient(135deg, #a6d0f7 0%, #f0f6ff 50%, #bedbf7 100%)", 
-        backgroundAttachment: "fixed",
-        minHeight: "100vh", width: "100%", maxWidth: "100vw", position: "relative", overflowX: "hidden", overflowY: "visible" 
-      }}>
-
-        <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "hidden" }}>
-          <div className="orb" style={{ left: "-10%", top: "-10%", width: "50vw", height: "50vw", background: "#8dbcf2", filter: "blur(140px)", opacity: 0.5 }} />
-          <div className="orb" style={{ right: "-5%", top: "20%", width: "40vw", height: "40vw", background: "#d6e6f9", filter: "blur(140px)", opacity: 0.6 }} />
-          <div className="orb" style={{ left: "15%", bottom: "-10%", width: "60vw", height: "60vw", background: "#d1e5fb", filter: "blur(150px)", opacity: 0.5 }} />
-          <div className="orb" style={{ right: "-10%", bottom: "-20%", width: "55vw", height: "55vw", background: "#b3d4f5", filter: "blur(130px)", opacity: 0.6 }} />
+    <Reveal>
+      <section className="mb-24">
+        <SectionHeading tag="TEAM" title={title} align="left" />
+        <div
+          className={`mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 ${
+            variant === "board" ? "xl:grid-cols-3" : "xl:grid-cols-4"
+          } 2xl:gap-10`}
+        >
+          {members.map((member, index) => (
+            <PersonCard key={member.name} member={member} variant={variant} index={index} />
+          ))}
         </div>
+      </section>
+    </Reveal>
+  );
+}
 
-        <div className="team-content" style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 28px 64px" }}>
+// ─── Main Component ─────────────────────────────────────────────────────
+export default function Team() {
+  const departments = useMemo(() => Object.entries(TEAM_DATA.teams), []);
 
-          <div className="team-hero fade-up" style={{ paddingTop: 64, paddingBottom: 54, textAlign: "center" }}>
-            <h1 style={{ fontFamily: "'Kaushan Script', cursive", fontSize: "clamp(54px, 7vw, 84px)", fontWeight: 400, lineHeight: 1.1, color: "#1c2e65", letterSpacing: "0", marginBottom: 20 }}>
-              Meet Our <span style={{ color: "#465de5" }}>Team</span>
+  return (
+    <div className="relative overflow-hidden">
+      {/* Side padding wrapper */}
+      <div className="mx-auto max-w-[1500px] px-5 lg:px-8">
+        {/* Background orbs */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 via-white to-indigo-50" />
+        <div className="absolute left-[-180px] top-0 -z-10 h-[420px] w-[420px] rounded-full bg-blue-400/20 blur-[120px]" />
+        <div className="absolute right-[-180px] top-[420px] -z-10 h-[420px] w-[420px] rounded-full bg-indigo-500/20 blur-[120px]" />
+
+        {/* ─── Hero ─── */}
+        <section className="mx-auto flex min-h-[65vh] max-w-7xl flex-col items-center justify-center px-6 pt-28 pb-24 text-center">
+          <Reveal>
+            <span className="px-4 py-1.5 rounded-full bg-white/80 border border-indigo-100/80 text-indigo-600 text-xs font-bold tracking-widest uppercase shadow-sm">
+            E-Cell IIT Indore
+          </span>
+
+            <h1 className="mt-8 text-5xl font-black leading-tight text-slate-900 md:text-7xl">
+              Meet The
+              <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+                People Behind Innovation
+              </span>
             </h1>
-            <p style={{ fontSize: 18, color: "#475569", lineHeight: 1.7, fontWeight: 400, maxWidth: 600, margin: "0 auto" }}>
-              The minds, makers, and movers behind every startup, every event, and every spark of entrepreneurial energy at IIT Indore.
+
+            <p className="mx-auto mt-10 max-w-4xl text-lg leading-9 text-slate-600">
+              A passionate community of innovators, designers, developers,
+              marketers and leaders building the entrepreneurial ecosystem at
+              IIT Indore.
             </p>
-          </div>
+          </Reveal>
+        </section>
 
-          <section className="fade-up" style={{ marginBottom: 64, animationDelay: "0.1s" }}>
-            <SectionHeader label="Board of Directors" accent="#f59e0b" />
-            <div className="sec-grid">
-              {TEAM_DATA.board.map((m, i) => (
-                <SecretaryCard key={m.name} member={m} index={i} />
-              ))}
-            </div>
-          </section>
+        {/* ─── Board ─── */}
+        <TeamSection title="Board of Directors" members={TEAM_DATA.board} variant="board" />
 
-          <section className="fade-up" style={{ marginBottom: 64, animationDelay: "0.2s" }}>
-            <SectionHeader label="Secretaries" accent="#f59e0b" />
-            <div className="sec-grid">
-              {TEAM_DATA.secretaries.map((m, i) => (
-                <SecretaryCard key={m.name} member={m} index={i + 3} />
-              ))}
-            </div>
-          </section>
+        {/* ─── Secretaries ─── */}
+        <TeamSection title="Secretaries" members={TEAM_DATA.secretaries} variant="board" />
 
-          <section className="fade-up" style={{ marginBottom: 64, animationDelay: "0.3s" }}>
-            <SectionHeader label="Team Leaders" accent="#465de5" /> 
-            <div className="mem-grid">
-              {TEAM_DATA.leaders.map((m, i) => (
-                <MemberCard key={m.name} member={m} index={i + 10} />
-              ))}
-            </div>
-          </section>
+        {/* ─── Team Leaders ─── */}
+        <TeamSection title="Team Leaders" members={TEAM_DATA.leaders} />
 
-          {Object.entries(TEAM_DATA.teams).map(([teamName, members], idx) => {
-            const isBlueTheme = idx % 2 === 0;
-            const sectionAccent = isBlueTheme ? "#465de5" : "#0d9488";
+        {/* ─── Departments ─── */}
+        {departments.map(([department, members], index) => (
+          <Reveal key={department} delay={0.1 * index}>
+            <section className="mb-24">
+              <SectionHeading tag="DEPARTMENT" title={`${department} Team`} align="left" />
+              <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:gap-10">
+                {members.map((member, i) => (
+                  <motion.div
+                    key={member.name}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06 }}
+                  >
+                    <PersonCard member={member} variant="member" />
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+          </Reveal>
+        ))}
 
-            return (
-              <section key={teamName} className="fade-up" style={{ marginBottom: 54, animationDelay: `${0.4 + idx * 0.1}s` }}>
-                <SectionHeader label={`${teamName} Team`} accent={sectionAccent} />
-                <div className="vol-grid">
-                  {members.map((m, i) => (
-                    <VolBadge key={m.name} member={m} index={i * idx * 2} isBlueTheme={isBlueTheme} />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-
-        </div>
+        {/* ─── CTA ─── */}
+        <section className="pb-32">
+          <Reveal>
+            <GlassCard className="overflow-hidden rounded-[40px] bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 py-12 px-8 text-center shadow-[0_40px_120px_rgba(59,130,246,.25)]">
+              <h2 className="text-4xl font-black text-white md:text-5xl">
+                Interested in Joining E-Cell?
+              </h2>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/90">
+                Work with an ambitious team, organize flagship events, connect
+                with founders, and help build the entrepreneurial ecosystem of
+                IIT Indore.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-5">
+                <GradientButton variant="light" to="/contact">
+                  Apply Now
+                </GradientButton>
+                <GradientButton variant="outline-light" to="/about">
+                  Learn More
+                </GradientButton>
+              </div>
+            </GlassCard>
+          </Reveal>
+        </section>
       </div>
-    </>
+    </div>
   );
 }
